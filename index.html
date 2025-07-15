@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToolKitPro - Free Online Image & PDF Tools</title>
+    <meta name="description" content="Free online tools for images and PDFs. Compress, convert, edit and optimize your files with our easy-to-use tools.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=pub-9770610643444805" crossorigin="anonymous"></script>
     <style>
         :root {
             --primary: #4361ee;
@@ -213,6 +215,19 @@
 
         .search-bar button:hover {
             background-color: var(--primary-light);
+        }
+
+        /* Ad Container */
+        .ad-container {
+            margin: 2rem 0;
+            text-align: center;
+            min-height: 90px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--light-gray);
+            border-radius: var(--border-radius);
+            overflow: hidden;
         }
 
         /* Tools Section */
@@ -698,6 +713,20 @@
         </div>
     </section>
 
+    <div class="container">
+        <div class="ad-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-app-pub-9770610643444805~6334751089"
+                 data-ad-slot="ca-app-pub-9770610643444805/4587389292"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+
     <section class="section">
         <div class="container">
             <div class="section-title">
@@ -707,56 +736,40 @@
             
             <div class="tools-grid">
                 <!-- Image Tools -->
-                <div class="tool-card">
-                    <div class="tool-card-badge">New</div>
-                    <div class="tool-card-img">
-                        <i class="fas fa-image"></i>
+                <a href="/image-compress.html" class="tool-card">
+                    <div class="tool-card-badge">Popular</div>
+                    <div class="tool-card-img" style="background: linear-gradient(135deg, #3a86ff 0%, #4361ee 100%);">
+                        <i class="fas fa-compress-alt" style="color: white; font-size: 3.5rem;"></i>
                     </div>
                     <div class="tool-card-content">
-                        <div class="tool-card">
-    <a href="/tool/image-compressor" class="/tool/img-compress.html">
-        <div class="tool-card-badge">Popular</div>
-        <div class="tool-card-img" style="background: linear-gradient(135deg, #3a86ff 0%, #4361ee 100%);">
-            <i class="fas fa-compress-alt" style="color: white; font-size: 3.5rem;"></i>
+                        <a href="/image-compressor" class="tool-card">
+    <div class="tool-card-badge">Popular</div>
+    <div class="tool-card-img" style="background: linear-gradient(135deg, #3a86ff 0%, #4361ee 100%);">
+        <i class="fas fa-compress-alt" style="color: white; font-size: 3.5rem;"></i>
+    </div>
+    <div class="tool-card-content">
+        <h3>Image Compressor</h3>
+        <p>Reduce image file size without losing quality. Supports JPG, PNG, WebP. Perfect for websites and social media.</p>
+        <div class="tool-card-footer">
+            <span class="tool-card-tag">Image</span>
+            <span class="tool-card-btn">
+                <i class="fas fa-arrow-right"></i> Use Tool
+            </span>
         </div>
-        <div class="tool-card-content">
-            <h3>Image Compressor</h3>
-            <p>Reduce image file size without losing quality. Supports JPG, PNG, WebP. Perfect for websites and social media.</p>
-            <div class="tool-card-stats">
-                <div class="stat">
-                    <i class="fas fa-check-circle"></i>
-                    <span>Preserves quality</span>
-                </div>
-                <div class="stat">
-                    <i class="fas fa-bolt"></i>
-                    <span>Fast processing</span>
-                </div>
-            </div>
-            <div class="tool-card-footer">
-                <span class="tool-card-tag">Image</span>
-                <span class="tool-card-tag">Optimization</span>
-                <span class="tool-card-btn">
-                    <i class="fas fa-arrow-right"></i> Use Tool
-                </span>
-            </div>
-        </div>
-    </a>
-</div>
+    </div>
+</a>
 
 <style>
     .tool-card {
+        display: block;
         background-color: white;
         border-radius: 12px;
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         overflow: hidden;
         transition: all 0.3s ease;
         position: relative;
-    }
-    
-    .tool-card-link {
         text-decoration: none;
         color: inherit;
-        display: block;
     }
     
     .tool-card:hover {
@@ -785,10 +798,6 @@
         transition: all 0.3s ease;
     }
     
-    .tool-card:hover .tool-card-img {
-        opacity: 0.9;
-    }
-    
     .tool-card-content {
         padding: 1.5rem;
     }
@@ -805,27 +814,6 @@
         margin-bottom: 1.25rem;
         font-size: 0.95rem;
         line-height: 1.5;
-    }
-    
-    .tool-card-stats {
-        display: flex;
-        gap: 1rem;
-        margin-bottom: 1.5rem;
-    }
-    
-    .tool-card-stats .stat {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-size: 0.85rem;
-        color: #4361ee;
-        background-color: rgba(67, 97, 238, 0.1);
-        padding: 0.35rem 0.75rem;
-        border-radius: 50px;
-    }
-    
-    .tool-card-stats .stat i {
-        font-size: 0.9rem;
     }
     
     .tool-card-footer {
@@ -847,14 +835,11 @@
     .tool-card-btn {
         background-color: #4361ee;
         color: white;
-        border: none;
         border-radius: 8px;
         padding: 0.6rem 1.25rem;
         font-size: 0.9rem;
         font-weight: 500;
-        cursor: pointer;
         transition: all 0.3s ease;
-        text-decoration: none;
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
@@ -865,20 +850,10 @@
         background-color: #3a86ff;
         transform: translateX(5px);
     }
-    
-    @media (max-width: 768px) {
-        .tool-card-img {
-            height: 150px;
-        }
-        
-        .tool-card-stats {
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-    }
 </style>
+                </a>
                 
-                <div class="tool-card">
+                <a href="/image-resizer" class="tool-card">
                     <div class="tool-card-img">
                         <i class="fas fa-crop"></i>
                     </div>
@@ -887,12 +862,14 @@
                         <p>Resize your images to any dimension while maintaining aspect ratio.</p>
                         <div class="tool-card-footer">
                             <span class="tool-card-tag">Image</span>
-                            <button class="tool-card-btn">Use Tool</button>
+                            <span class="tool-card-btn">
+                                <i class="fas fa-arrow-right"></i> Use Tool
+                            </span>
                         </div>
                     </div>
-                </div>
+                </a>
                 
-                <div class="tool-card">
+                <a href="/image-converter" class="tool-card">
                     <div class="tool-card-img">
                         <i class="fas fa-exchange-alt"></i>
                     </div>
@@ -901,14 +878,16 @@
                         <p>Convert between JPG, PNG, WebP and other popular image formats.</p>
                         <div class="tool-card-footer">
                             <span class="tool-card-tag">Image</span>
-                            <button class="tool-card-btn">Use Tool</button>
+                            <span class="tool-card-btn">
+                                <i class="fas fa-arrow-right"></i> Use Tool
+                            </span>
                         </div>
                     </div>
-                </div>
+                </a>
                 
                 <!-- PDF Tools -->
-                <div class="tool-card">
-                    <div class="tool-card-badge">Popular</div>
+                <a href="/pdf-compressor" class="tool-card">
+                    <div class="tool-card-badge">New</div>
                     <div class="tool-card-img">
                         <i class="fas fa-file-pdf"></i>
                     </div>
@@ -917,12 +896,14 @@
                         <p>Reduce PDF file size while preserving quality. Perfect for email attachments.</p>
                         <div class="tool-card-footer">
                             <span class="tool-card-tag">PDF</span>
-                            <button class="tool-card-btn">Use Tool</button>
+                            <span class="tool-card-btn">
+                                <i class="fas fa-arrow-right"></i> Use Tool
+                            </span>
                         </div>
                     </div>
-                </div>
+                </a>
                 
-                <div class="tool-card">
+                <a href="/pdf-to-word" class="tool-card">
                     <div class="tool-card-img">
                         <i class="fas fa-file-word"></i>
                     </div>
@@ -931,12 +912,14 @@
                         <p>Convert PDF files to editable Word documents with high accuracy.</p>
                         <div class="tool-card-footer">
                             <span class="tool-card-tag">PDF</span>
-                            <button class="tool-card-btn">Use Tool</button>
+                            <span class="tool-card-btn">
+                                <i class="fas fa-arrow-right"></i> Use Tool
+                            </span>
                         </div>
                     </div>
-                </div>
+                </a>
                 
-                <div class="tool-card">
+                <a href="/pdf-protector" class="tool-card">
                     <div class="tool-card-img">
                         <i class="fas fa-lock"></i>
                     </div>
@@ -945,13 +928,29 @@
                         <p>Add passwords and permissions to your PDF files to secure them.</p>
                         <div class="tool-card-footer">
                             <span class="tool-card-tag">PDF</span>
-                            <button class="tool-card-btn">Use Tool</button>
+                            <span class="tool-card-btn">
+                                <i class="fas fa-arrow-right"></i> Use Tool
+                            </span>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </section>
+
+    <div class="container">
+        <div class="ad-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-app-pub-9770610643444805~6334751089"
+                 data-ad-slot="ca-app-pub-9770610643444805/4587389292"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
 
     <section class="section categories">
         <div class="container">
@@ -961,47 +960,47 @@
             </div>
             
             <div class="categories-grid">
-                <div class="category-card">
+                <a href="/image-tools" class="category-card">
                     <div class="category-icon">
                         <i class="fas fa-image"></i>
                     </div>
                     <h3 class="category-name">Image Tools</h3>
-                </div>
+                </a>
                 
-                <div class="category-card">
+                <a href="/pdf-tools" class="category-card">
                     <div class="category-icon">
                         <i class="fas fa-file-pdf"></i>
                     </div>
                     <h3 class="category-name">PDF Tools</h3>
-                </div>
+                </a>
                 
-                <div class="category-card">
+                <a href="/compression-tools" class="category-card">
                     <div class="category-icon">
                         <i class="fas fa-compress-alt"></i>
                     </div>
                     <h3 class="category-name">Compression</h3>
-                </div>
+                </a>
                 
-                <div class="category-card">
+                <a href="/conversion-tools" class="category-card">
                     <div class="category-icon">
                         <i class="fas fa-exchange-alt"></i>
                     </div>
                     <h3 class="category-name">Conversion</h3>
-                </div>
+                </a>
                 
-                <div class="category-card">
+                <a href="/editing-tools" class="category-card">
                     <div class="category-icon">
                         <i class="fas fa-edit"></i>
                     </div>
                     <h3 class="category-name">Editing</h3>
-                </div>
+                </a>
                 
-                <div class="category-card">
+                <a href="/security-tools" class="category-card">
                     <div class="category-icon">
                         <i class="fas fa-lock"></i>
                     </div>
                     <h3 class="category-name">Security</h3>
-                </div>
+                </a>
             </div>
         </div>
     </section>
@@ -1157,39 +1156,8 @@
                     : '<i class="fas fa-bars"></i>';
             });
             
-            // Tool card buttons - would link to actual tools in production
-            const toolButtons = document.querySelectorAll('.tool-card-btn');
-            toolButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const toolName = this.closest('.tool-card').querySelector('h3').textContent;
-                    alert(`In a real implementation, this would open the ${toolName} tool.`);
-                });
-            });
-            
-            // Category cards - would link to category pages in production
-            const categoryCards = document.querySelectorAll('.category-card');
-            categoryCards.forEach(card => {
-                card.addEventListener('click', function() {
-                    const categoryName = this.querySelector('.category-name').textContent;
-                    alert(`In a real implementation, this would navigate to the ${categoryName} category page.`);
-                });
-            });
-            
-            // Search functionality - would implement search in production
-            const searchInput = document.querySelector('.search-bar input');
-            const searchButton = document.querySelector('.search-bar button');
-            
-            searchButton.addEventListener('click', function() {
-                if (searchInput.value.trim()) {
-                    alert(`In a real implementation, this would search for: "${searchInput.value}"`);
-                }
-            });
-            
-            searchInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter' && searchInput.value.trim()) {
-                    alert(`In a real implementation, this would search for: "${searchInput.value}"`);
-                }
-            });
+            // Initialize AdSense
+            (adsbygoogle = window.adsbygoogle || []).push({});
         });
     </script>
 </body>
