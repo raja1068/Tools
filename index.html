@@ -12,8 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Cache busting for CSS -->
-    <link rel="stylesheet" href="/css/styles.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="/css/styles.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=pub-9770610643444805" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -24,7 +23,7 @@
                 <span>ToolKitPro</span>
             </a>
             
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
                 <i class="fas fa-bars"></i>
             </button>
             
@@ -46,7 +45,7 @@
             <p>Free, fast and easy-to-use tools to optimize, convert and edit your files without installing any software</p>
             
             <div class="search-bar">
-                <input type="text" placeholder="Search for tools...">
+                <input type="text" placeholder="Search for tools..." aria-label="Search tools">
                 <button><i class="fas fa-search"></i> Search</button>
             </div>
         </div>
@@ -74,209 +73,26 @@
             </div>
             
             <div class="tools-grid">
-                <!-- Image Tools -->
-                <a href="raja1068.github.io/image-compress.html" class="tool-card">
+                <a href="/image-compressor" class="tool-card">
                     <div class="tool-card-badge">Popular</div>
                     <div class="tool-card-img" style="background: linear-gradient(135deg, #3a86ff 0%, #4361ee 100%);">
                         <i class="fas fa-compress-alt" style="color: white; font-size: 3.5rem;"></i>
                     </div>
                     <div class="tool-card-content">
-                        <a href="/image-compressor" class="tool-card">
-    <div class="tool-card-badge">Popular</div>
-    <div class="tool-card-img" style="background: linear-gradient(135deg, #3a86ff 0%, #4361ee 100%);">
-        <i class="fas fa-compress-alt" style="color: white; font-size: 3.5rem;"></i>
-    </div>
-    <div class="tool-card-content">
-        <title>Image Compressor | ToolKitPro</title>
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    <style>
-        :root {
-            --primary: #4361ee;
-            --primary-light: #3a86ff;
-            --accent: #f72585;
-            --dark: #212529;
-            --gray: #6c757d;
-            --light-gray: #e9ecef;
-            --white: #ffffff;
-            --border-radius: 12px;
-            --box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            background-color: #f8f9fa;
-            padding: 0;
-            margin: 0;
-        }
-        
-        .compressor-container {
-            max-width: 1000px;
-            margin: 2rem auto;
-            padding: 2rem;
-            background: var(--white);
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-        }
-        
-        /* Add all your compression tool styles here */
-        /* ... */
-    </style>
-    <!-- Cache busting for CSS -->
-    <link rel="stylesheet" href="/css/compressor.css?v=<?php echo time(); ?>">
-</head>
-<body>
-    <div class="compressor-container">
-        <!-- Your compression tool HTML -->
-        <div class="upload-area" id="uploadArea">
-            <!-- Content remains the same -->
-        </div>
-        
-    <!-- Cache busting for JS -->
-    <script src="/js/main.js?v=<?php echo time(); ?>"></script>
-    <script>
-        // Additional cache control measures
-        document.addEventListener('DOMContentLoaded', function() {
-            // Set current year in footer
-            document.getElementById('currentYear').textContent = new Date().getFullYear();
-            
-            // Mobile menu toggle
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const mainNav = document.getElementById('mainNav');
-            
-            mobileMenuBtn.addEventListener('click', function() {
-                mainNav.classList.toggle('active');
-                mobileMenuBtn.innerHTML = mainNav.classList.contains('active') 
-                    ? '<i class="fas fa-times"></i>' 
-                    : '<i class="fas fa-bars"></i>';
-            });
-            
-            // Initialize AdSense
-            (adsbygoogle = window.adsbygoogle || []).push({});
-            
-            // Force cache refresh for all assets
-            if(window.performance) {
-                const entries = performance.getEntriesByType("resource");
-                entries.forEach(entry => {
-                    const url = new URL(entry.name);
-                    url.searchParams.set('v', new Date().getTime());
-                    fetch(url.toString(), {cache: "reload"});
-                });
-            }
-        });
-    </script>
-</body>
-</html>
-        <h3>Image Compressor</h3>
-        <p>Reduce image file size without losing quality. Supports JPG, PNG, WebP. Perfect for websites and social media.</p>
-        <div class="tool-card-footer">
-            <span class="tool-card-tag">Image</span>
-            <span class="tool-card-btn">
-                <i class="fas fa-arrow-right"></i> Use Tool
-            </span>
-        </div>
-    </div>
-</a>
-
-<style>
-    .tool-card {
-        display: block;
-        background-color: white;
-        border-radius: 12px;
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-        transition: all 0.3s ease;
-        position: relative;
-        text-decoration: none;
-        color: inherit;
-    }
-    
-    .tool-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 20px -5px rgba(0, 0, 0, 0.15);
-    }
-    
-    .tool-card-badge {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        background-color: #f72585;
-        color: white;
-        padding: 0.25rem 0.75rem;
-        border-radius: 50px;
-        font-size: 0.75rem;
-        font-weight: 600;
-        z-index: 2;
-    }
-    
-    .tool-card-img {
-        height: 180px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
-    }
-    
-    .tool-card-content {
-        padding: 1.5rem;
-    }
-    
-    .tool-card-content h3 {
-        font-size: 1.3rem;
-        font-weight: 600;
-        margin-bottom: 0.75rem;
-        color: #212529;
-    }
-    
-    .tool-card-content p {
-        color: #6c757d;
-        margin-bottom: 1.25rem;
-        font-size: 0.95rem;
-        line-height: 1.5;
-    }
-    
-    .tool-card-footer {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        flex-wrap: wrap;
-    }
-    
-    .tool-card-tag {
-        background-color: #e9ecef;
-        color: #495057;
-        padding: 0.35rem 0.75rem;
-        border-radius: 50px;
-        font-size: 0.75rem;
-        font-weight: 500;
-    }
-    
-    .tool-card-btn {
-        background-color: #4361ee;
-        color: white;
-        border-radius: 8px;
-        padding: 0.6rem 1.25rem;
-        font-size: 0.9rem;
-        font-weight: 500;
-        transition: all 0.3s ease;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        margin-left: auto;
-    }
-    
-    .tool-card:hover .tool-card-btn {
-        background-color: #3a86ff;
-        transform: translateX(5px);
-    }
-</style>
+                        <h3>Image Compressor</h3>
+                        <p>Reduce image file size without losing quality. Supports JPG, PNG, WebP. Perfect for websites and social media.</p>
+                        <div class="tool-card-footer">
+                            <span class="tool-card-tag">Image</span>
+                            <span class="tool-card-btn">
+                                <i class="fas fa-arrow-right"></i> Use Tool
+                            </span>
+                        </div>
+                    </div>
                 </a>
                 
                 <a href="/image-resizer" class="tool-card">
-                    <div class="tool-card-img">
-                        <i class="fas fa-crop"></i>
+                    <div class="tool-card-img" style="background: linear-gradient(135deg, #f72585 0%, #b5179e 100%);">
+                        <i class="fas fa-crop" style="color: white; font-size: 3.5rem;"></i>
                     </div>
                     <div class="tool-card-content">
                         <h3>Image Resizer</h3>
@@ -291,8 +107,8 @@
                 </a>
                 
                 <a href="/image-converter" class="tool-card">
-                    <div class="tool-card-img">
-                        <i class="fas fa-exchange-alt"></i>
+                    <div class="tool-card-img" style="background: linear-gradient(135deg, #4cc9f0 0%, #4895ef 100%);">
+                        <i class="fas fa-exchange-alt" style="color: white; font-size: 3.5rem;"></i>
                     </div>
                     <div class="tool-card-content">
                         <h3>Image Converter</h3>
@@ -306,11 +122,10 @@
                     </div>
                 </a>
                 
-                <!-- PDF Tools -->
                 <a href="/pdf-compressor" class="tool-card">
                     <div class="tool-card-badge">New</div>
-                    <div class="tool-card-img">
-                        <i class="fas fa-file-pdf"></i>
+                    <div class="tool-card-img" style="background: linear-gradient(135deg, #7209b7 0%, #560bad 100%);">
+                        <i class="fas fa-file-pdf" style="color: white; font-size: 3.5rem;"></i>
                     </div>
                     <div class="tool-card-content">
                         <h3>PDF Compressor</h3>
@@ -325,8 +140,8 @@
                 </a>
                 
                 <a href="/pdf-to-word" class="tool-card">
-                    <div class="tool-card-img">
-                        <i class="fas fa-file-word"></i>
+                    <div class="tool-card-img" style="background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);">
+                        <i class="fas fa-file-word" style="color: white; font-size: 3.5rem;"></i>
                     </div>
                     <div class="tool-card-content">
                         <h3>PDF to Word</h3>
@@ -341,8 +156,8 @@
                 </a>
                 
                 <a href="/pdf-protector" class="tool-card">
-                    <div class="tool-card-img">
-                        <i class="fas fa-lock"></i>
+                    <div class="tool-card-img" style="background: linear-gradient(135deg, #3f37c9 0%, #277da1 100%);">
+                        <i class="fas fa-lock" style="color: white; font-size: 3.5rem;"></i>
                     </div>
                     <div class="tool-card-content">
                         <h3>PDF Protector</h3>
@@ -515,10 +330,10 @@
                     <a href="/" class="footer-logo">ToolKitPro</a>
                     <p>Providing free, high-quality online tools since 2023. Our mission is to make file processing accessible to everyone.</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
                 
