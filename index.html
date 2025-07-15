@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/css/styles.css">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=pub-9770610643444805" crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9770610643444805" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
@@ -22,12 +22,10 @@
                 <i class="fas fa-tools logo-icon"></i>
                 <span>ToolKitPro</span>
             </a>
-            
             <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
                 <i class="fas fa-bars"></i>
             </button>
-            
-            <nav id="mainNav">
+            <nav id="mainNav" role="navigation">
                 <ul>
                     <li><a href="/">Home</a></li>
                     <li><a href="/tools">All Tools</a></li>
@@ -39,15 +37,15 @@
         </div>
     </header>
 
+    <main>
     <section class="hero">
         <div class="container hero-content">
             <h1>Your Complete <span>Online Toolkit</span> for Images & PDFs</h1>
             <p>Free, fast and easy-to-use tools to optimize, convert and edit your files without installing any software</p>
-            
-            <div class="search-bar">
-                <input type="text" placeholder="Search for tools..." aria-label="Search tools">
-                <button><i class="fas fa-search"></i> Search</button>
-            </div>
+            <form class="search-bar" action="/tools" method="get" autocomplete="off" role="search">
+                <input type="text" name="q" placeholder="Search for tools..." aria-label="Search tools">
+                <button type="submit"><i class="fas fa-search"></i> Search</button>
+            </form>
         </div>
     </section>
 
@@ -55,13 +53,10 @@
         <div class="ad-container">
             <ins class="adsbygoogle"
                  style="display:block"
-                 data-ad-client="ca-app-pub-9770610643444805~6334751089"
+                 data-ad-client="ca-pub-9770610643444805"
                  data-ad-slot="4587389292"
                  data-ad-format="auto"
                  data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
         </div>
     </div>
 
@@ -71,9 +66,8 @@
                 <h2>Popular Tools</h2>
                 <p>Our most frequently used tools to help you with your daily tasks</p>
             </div>
-            
             <div class="tools-grid">
-                <a href="/Tools/image-compressor" class="tool-card">
+                <a href="/tools/image-compressor" class="tool-card">
                     <div class="tool-card-badge">Popular</div>
                     <div class="tool-card-img" style="background: linear-gradient(135deg, #3a86ff 0%, #4361ee 100%);">
                         <i class="fas fa-compress-alt" style="color: white; font-size: 3.5rem;"></i>
@@ -89,7 +83,6 @@
                         </div>
                     </div>
                 </a>
-                
                 <a href="/image-resizer" class="tool-card">
                     <div class="tool-card-img" style="background: linear-gradient(135deg, #f72585 0%, #b5179e 100%);">
                         <i class="fas fa-crop" style="color: white; font-size: 3.5rem;"></i>
@@ -105,7 +98,6 @@
                         </div>
                     </div>
                 </a>
-                
                 <a href="/image-converter" class="tool-card">
                     <div class="tool-card-img" style="background: linear-gradient(135deg, #4cc9f0 0%, #4895ef 100%);">
                         <i class="fas fa-exchange-alt" style="color: white; font-size: 3.5rem;"></i>
@@ -121,7 +113,6 @@
                         </div>
                     </div>
                 </a>
-                
                 <a href="/pdf-compressor" class="tool-card">
                     <div class="tool-card-badge">New</div>
                     <div class="tool-card-img" style="background: linear-gradient(135deg, #7209b7 0%, #560bad 100%);">
@@ -138,7 +129,6 @@
                         </div>
                     </div>
                 </a>
-                
                 <a href="/pdf-to-word" class="tool-card">
                     <div class="tool-card-img" style="background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);">
                         <i class="fas fa-file-word" style="color: white; font-size: 3.5rem;"></i>
@@ -154,7 +144,6 @@
                         </div>
                     </div>
                 </a>
-                
                 <a href="/pdf-protector" class="tool-card">
                     <div class="tool-card-img" style="background: linear-gradient(135deg, #3f37c9 0%, #277da1 100%);">
                         <i class="fas fa-lock" style="color: white; font-size: 3.5rem;"></i>
@@ -178,13 +167,10 @@
         <div class="ad-container">
             <ins class="adsbygoogle"
                  style="display:block"
-                 data-ad-client="ca-app-pub-9770610643444805~6334751089"
+                 data-ad-client="ca-pub-9770610643444805"
                  data-ad-slot="4587389292"
                  data-ad-format="auto"
                  data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
         </div>
     </div>
 
@@ -194,7 +180,6 @@
                 <h2>Categories</h2>
                 <p>Browse tools by category to find exactly what you need</p>
             </div>
-            
             <div class="categories-grid">
                 <a href="/image-tools" class="category-card">
                     <div class="category-icon">
@@ -202,35 +187,30 @@
                     </div>
                     <h3 class="category-name">Image Tools</h3>
                 </a>
-                
                 <a href="/pdf-tools" class="category-card">
                     <div class="category-icon">
                         <i class="fas fa-file-pdf"></i>
                     </div>
                     <h3 class="category-name">PDF Tools</h3>
                 </a>
-                
                 <a href="/compression-tools" class="category-card">
                     <div class="category-icon">
                         <i class="fas fa-compress-alt"></i>
                     </div>
                     <h3 class="category-name">Compression</h3>
                 </a>
-                
                 <a href="/conversion-tools" class="category-card">
                     <div class="category-icon">
                         <i class="fas fa-exchange-alt"></i>
                     </div>
                     <h3 class="category-name">Conversion</h3>
                 </a>
-                
                 <a href="/editing-tools" class="category-card">
                     <div class="category-icon">
                         <i class="fas fa-edit"></i>
                     </div>
                     <h3 class="category-name">Editing</h3>
                 </a>
-                
                 <a href="/security-tools" class="category-card">
                     <div class="category-icon">
                         <i class="fas fa-lock"></i>
@@ -247,7 +227,6 @@
                 <h2>Why Choose Our Tools?</h2>
                 <p>We provide the best online tools experience for our users</p>
             </div>
-            
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
@@ -258,7 +237,6 @@
                         <p>Our tools process your files in seconds using advanced algorithms and cloud computing.</p>
                     </div>
                 </div>
-                
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-lock"></i>
@@ -268,7 +246,6 @@
                         <p>Your files are processed in your browser and never uploaded to our servers.</p>
                     </div>
                 </div>
-                
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-dollar-sign"></i>
@@ -278,7 +255,6 @@
                         <p>All our tools are free to use with no hidden charges or watermarks.</p>
                     </div>
                 </div>
-                
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-desktop"></i>
@@ -288,7 +264,6 @@
                         <p>Works directly in your browser on any device - no software to download.</p>
                     </div>
                 </div>
-                
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-thumbs-up"></i>
@@ -298,7 +273,6 @@
                         <p>Simple interfaces that anyone can use without technical knowledge.</p>
                     </div>
                 </div>
-                
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-infinity"></i>
@@ -322,6 +296,7 @@
             </div>
         </div>
     </section>
+    </main>
 
     <footer>
         <div class="container">
@@ -336,7 +311,6 @@
                         <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
-                
                 <div class="footer-links">
                     <h3>Quick Links</h3>
                     <ul>
@@ -347,7 +321,6 @@
                         <li><a href="/about">About Us</a></li>
                     </ul>
                 </div>
-                
                 <div class="footer-links">
                     <h3>Resources</h3>
                     <ul>
@@ -358,7 +331,6 @@
                         <li><a href="/terms">Terms of Service</a></li>
                     </ul>
                 </div>
-                
                 <div class="footer-links">
                     <h3>Support</h3>
                     <ul>
@@ -369,7 +341,6 @@
                     </ul>
                 </div>
             </div>
-            
             <div class="footer-bottom">
                 <p>&copy; <span id="currentYear"></span> ToolKitPro. All rights reserved.</p>
             </div>
@@ -380,20 +351,22 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Set current year in footer
             document.getElementById('currentYear').textContent = new Date().getFullYear();
-            
+
             // Mobile menu toggle
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
             const mainNav = document.getElementById('mainNav');
-            
+
             mobileMenuBtn.addEventListener('click', function() {
                 mainNav.classList.toggle('active');
                 mobileMenuBtn.innerHTML = mainNav.classList.contains('active') 
                     ? '<i class="fas fa-times"></i>' 
                     : '<i class="fas fa-bars"></i>';
             });
-            
-            // Initialize AdSense
-            (adsbygoogle = window.adsbygoogle || []).push({});
+
+            // Initialize AdSense for each ad container
+            document.querySelectorAll('.adsbygoogle').forEach(function(ad) {
+                try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch(e){}
+            });
         });
     </script>
 </body>
