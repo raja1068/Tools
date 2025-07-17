@@ -1,167 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Free online image compression tool. Reduce image size while maintaining quality. SEO-optimized and mobile-friendly." />
-  <meta name="keywords" content="image compressor, online image compression, reduce image size, compress jpg png" />
-  <meta name="author" content="Rajarshi" />
-  <title>Online Image Compression Tool</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Compress images, convert files, resize photos and merge PDFs online. All tools in one responsive and SEO-friendly site.">
+  <meta name="keywords" content="image compression, image to pdf, png to jpg, image resizer, pdf to jpg, merge pdf, pdf compressor, word to pdf, excel to pdf">
+  <meta name="author" content="Image Compressor Pro">
+  <title>Image Compressor Pro - Free Online File Tools</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f4f4f4;
-      color: #333;
-    }
-    header {
-      background: #0a74da;
-      color: white;
-      padding: 1rem;
-      text-align: center;
-    }
-    main {
-      max-width: 800px;
-      margin: auto;
-      padding: 2rem;
-      background: white;
-    }
-    .section {
-      margin-bottom: 2rem;
-    }
-    label, input, button {
-      display: block;
-      width: 100%;
-      margin-top: 0.5rem;
-    }
-    input[type="range"] {
-      width: 100%;
-    }
-    .ad-space {
-      margin: 2rem 0;
-      text-align: center;
-      border: 1px dashed #ccc;
-      padding: 1rem;
-      background: #fafafa;
-    }
-    #output {
-      margin-top: 1rem;
-    }
-    img {
-      max-width: 100%;
-      height: auto;
-    }
-    @media (max-width: 600px) {
-      body, main {
-        padding: 1rem;
-      }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; background: #f9f9f9; color: #333; }
+    header { background: #007bff; color: white; padding: 20px; text-align: center; }
+    nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; background: #f1f1f1; padding: 10px; }
+    nav a { text-decoration: none; color: #007bff; font-weight: bold; }
+    main { padding: 20px; max-width: 1200px; margin: auto; }
+    .tool { background: white; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .tool h2 { margin-bottom: 10px; color: #007bff; }
+    input, select, button { padding: 8px; margin: 5px 0; width: 100%; max-width: 300px; }
+    button { background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    button:hover { background: #0056b3; }
+    footer { background: #222; color: #ddd; text-align: center; padding: 20px; }
+    .ads { background: #e2e2e2; padding: 10px; margin: 20px 0; text-align: center; border-radius: 5px; }
+    @media (min-width: 768px) {
+      .tools-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     }
   </style>
+  <!-- Google AdSense Placeholder -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <header>
-    <h1>Online Image Compression Tool</h1>
-    <p>Compress images instantly. Free & easy to use!</p>
+    <h1>Image Compressor Pro</h1>
+    <p>Online tools to compress, convert, and optimize images and PDFs</p>
   </header>
 
-  <main>
-    <!-- Ad Block Top -->
-    <div class="ad-space">
-      <!-- Google AdSense Top Ad -->
+  <nav>
+    <a href="#compress">Compress Image</a>
+    <a href="#imageToPdf">Image to PDF</a>
+    <a href="#pngToJpg">PNG to JPG</a>
+    <a href="#resizeImage">Resize Image</a>
+    <a href="#pdfToJpg">PDF to JPG</a>
+    <a href="#mergePdf">Merge PDFs</a>
+    <a href="#compressPdf">Compress PDF</a>
+    <a href="#wordToPdf">Word to PDF</a>
+    <a href="#excelToPdf">Excel to PDF</a>
+  </nav>
+
+  <main class="tools-grid">
+    <div class="tool" id="compress">
+      <h2>Compress Image</h2>
+      <input type="file" accept="image/*">
+      <label>Compression Level</label>
+      <select>
+        <option value="0.3">High</option>
+        <option value="0.5">Medium</option>
+        <option value="0.8">Low</option>
+      </select>
+      <button>Compress & Download</button>
+    </div>
+
+    <div class="tool" id="imageToPdf">
+      <h2>Image to PDF</h2>
+      <input type="file" accept="image/*" multiple>
+      <button>Convert & Download PDF</button>
+    </div>
+
+    <div class="tool" id="pngToJpg">
+      <h2>PNG to JPG</h2>
+      <input type="file" accept="image/png">
+      <button>Convert & Download</button>
+    </div>
+
+    <div class="tool" id="resizeImage">
+      <h2>Resize Image</h2>
+      <input type="file" accept="image/*">
+      <label>Width</label>
+      <input type="number" placeholder="Enter width in px">
+      <label>Height</label>
+      <input type="number" placeholder="Enter height in px">
+      <button>Resize & Download</button>
+    </div>
+
+    <div class="tool" id="pdfToJpg">
+      <h2>PDF to JPG</h2>
+      <input type="file" accept="application/pdf">
+      <button>Convert & Download Images</button>
+    </div>
+
+    <div class="tool" id="mergePdf">
+      <h2>Merge Multiple PDFs</h2>
+      <input type="file" accept="application/pdf" multiple>
+      <button>Merge & Download</button>
+    </div>
+
+    <div class="tool" id="compressPdf">
+      <h2>Compress PDF</h2>
+      <input type="file" accept="application/pdf">
+      <label>Compression Level</label>
+      <select>
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
+      <button>Compress & Download</button>
+    </div>
+
+    <div class="tool" id="wordToPdf">
+      <h2>Word to PDF</h2>
+      <input type="file" accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+      <button>Convert & Download</button>
+    </div>
+
+    <div class="tool" id="excelToPdf">
+      <h2>Excel to PDF</h2>
+      <input type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+      <button>Convert & Download</button>
+    </div>
+
+    <div class="ads">
+      <!-- AdSense Ad Unit Placeholder -->
       <ins class="adsbygoogle"
            style="display:block"
-           data-ad-client="ca-pub-9770610643444805"
+           data-ad-client="pub-9770610643444805"
            data-ad-slot="4587389292"
            data-ad-format="auto"
            data-full-width-responsive="true"></ins>
-    </div>
-
-    <div class="section">
-      <label for="imageInput">Select an image to compress:</label>
-      <input type="file" id="imageInput" accept="image/*" />
-    </div>
-
-    <div class="section">
-      <label for="qualityRange">Compression Quality: <span id="qualityValue">0.8</span></label>
-      <input type="range" id="qualityRange" min="0.1" max="1" step="0.1" value="0.8" />
-    </div>
-
-    <div class="section">
-      <button id="compressBtn">Compress Image</button>
-    </div>
-
-    <div class="section" id="output"></div>
-
-    <!-- Ad Block Bottom -->
-    <div class="ad-space">
-      <!-- Google AdSense Bottom Ad -->
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-9770610643444805"
-           data-ad-slot="4587389292"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
     </div>
   </main>
 
-  <script>
-    const imageInput = document.getElementById('imageInput');
-    const compressBtn = document.getElementById('compressBtn');
-    const qualityRange = document.getElementById('qualityRange');
-    const qualityValue = document.getElementById('qualityValue');
-    const output = document.getElementById('output');
-
-    qualityRange.addEventListener('input', () => {
-      qualityValue.textContent = qualityRange.value;
-    });
-
-    compressBtn.addEventListener('click', async () => {
-      const file = imageInput.files[0];
-      if (!file) return alert("Please select an image.");
-
-      const quality = parseFloat(qualityRange.value);
-      const reader = new FileReader();
-
-      reader.onload = function(event) {
-        const img = new Image();
-        img.onload = function () {
-          const canvas = document.createElement('canvas');
-          canvas.width = img.width;
-          canvas.height = img.height;
-
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0);
-
-          canvas.toBlob(blob => {
-            const url = URL.createObjectURL(blob);
-            const resultImg = document.createElement('img');
-            resultImg.src = url;
-
-            const downloadLink = document.createElement('a');
-            downloadLink.href = url;
-            downloadLink.download = "compressed-image.jpg";
-            downloadLink.textContent = "Download Compressed Image";
-            downloadLink.style.display = "block";
-            downloadLink.style.marginTop = "1rem";
-
-            output.innerHTML = '';
-            output.appendChild(resultImg);
-            output.appendChild(downloadLink);
-          }, 'image/jpeg', quality);
-        };
-        img.src = event.target.result;
-      };
-
-      reader.readAsDataURL(file);
-    });
-
-    // Load AdSense
-    (adsbygoogle = window.adsbygoogle || []).push({});
-    (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
-
-  <!-- Google AdSense script -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <footer>
+    <p>&copy; 2025 Image Compressor Pro. All rights reserved.</p>
+  </footer>
 </body>
 </html>
