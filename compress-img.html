@@ -221,19 +221,4 @@
       const compressionLevel = document.getElementById('pdfCompressionRange').value;
       if (!input.files.length) return;
       const file = input.files[0];
-      const uint8Array = await file.arrayBuffer();
-      const pdfDoc = await PDFLib.PDFDocument.load(uint8Array);
-      const pdfBytes = await pdfDoc.save({ useObjectStreams: false }); // simulate compression
-
-      const link = document.getElementById('pdfDownloadLink');
-      const blob = new Blob([pdfBytes], { type: 'application/pdf' });
-      link.href = URL.createObjectURL(blob);
-      link.style.display = 'inline';
-    }
-
-    // Load AdSense script
-    (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
-</body>
-
-</html>
+      const 2
