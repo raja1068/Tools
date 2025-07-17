@@ -1,139 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="All-in-one tools for image and PDF processing. Compress, convert, merge, and more online.">
-  <meta name="keywords" content="image compression, PDF converter, jpg to pdf, png to jpg, pdf merge, resize image">
-  <title>Image Compressor Pro - Tools Suite</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta name="description" content="Homepage for Image & PDF Tool Suite - access all tools for compression, conversion, and optimization.">
+  <meta name="keywords" content="Image tools, PDF tools, convert image to PDF, compress PDF, JPG to PNG, Word to PDF, Excel to PDF">
+  <meta name="author" content="Image Compressor Pro">
+  <title>Home | Image & PDF Tools</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f8f9fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f2f5;
+      margin: 0;
+      padding: 0;
     }
-    .tool-card {
-      border: none;
+
+    header {
+      background-color: #2d2dff;
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .card {
+      background: white;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      transition: transform 0.2s ease-in-out;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease;
+      text-align: center;
     }
-    .tool-card:hover {
+
+    .card:hover {
       transform: translateY(-5px);
     }
-    .tool-icon {
-      font-size: 2rem;
+
+    .card h3 {
+      margin-bottom: 0.5rem;
+      color: #2d2dff;
     }
-    .hero {
-      text-align: center;
-      padding: 3rem 1rem;
-      background-color: #007bff;
+
+    .card p {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 1rem;
+    }
+
+    .card a {
+      display: inline-block;
+      background: #2d2dff;
       color: white;
-      border-radius: 0 0 20px 20px;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.2s;
     }
-    .hero h1 {
-      font-weight: bold;
-      font-size: 2.5rem;
+
+    .card a:hover {
+      background: #1c1ccc;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #222;
+      color: #fff;
     }
   </style>
 </head>
+
 <body>
+  <header>
+    <h1>Welcome to Image & PDF Tool Suite</h1>
+    <p>Access all powerful tools to compress, convert, and manage your files online</p>
+  </header>
 
-  <section class="hero">
-    <h1>Image Compressor Pro</h1>
-    <p class="lead">Your all-in-one online toolbox for image and PDF processing</p>
-  </section>
-
-  <div class="container py-5">
-    <div class="row g-4">
-
-      <!-- Tool Cards -->
-      <div class="col-md-6 col-lg-4">
-        <div class="card tool-card p-3">
-          <h5>Compress Image</h5>
-          <p>Reduce image file size without losing quality.</p>
-          <a href="/Tools/tool.html#compress" class="btn btn-primary">Open Tool</a>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-4">
-        <div class="card tool-card p-3">
-          <h5>Image to PDF</h5>
-          <p>Convert images (JPG, PNG) to PDF format.</p>
-          <a href="/Tools/tool.html#img2pdf" class="btn btn-primary">Open Tool</a>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-4">
-        <div class="card tool-card p-3">
-          <h5>PNG to JPG</h5>
-          <p>Convert PNG images to JPG format quickly.</p>
-          <a href="/Tools/tool.html#png2jpg" class="btn btn-primary">Open Tool</a>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-4">
-        <div class="card tool-card p-3">
-          <h5>Resize Image</h5>
-          <p>Resize your images with scale percentage control.</p>
-          <a href="/Tools/tool.html#resize" class="btn btn-primary">Open Tool</a>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-4">
-        <div class="card tool-card p-3">
-          <h5>PDF to JPG</h5>
-          <p>Convert PDF pages into high quality JPG images.</p>
-          <a href="/Tools/tool.html#pdf2jpg" class="btn btn-primary">Open Tool</a>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-4">
-        <div class="card tool-card p-3">
-          <h5>Merge PDFs</h5>
-          <p>Combine multiple PDF documents into one.</p>
-          <a href="/Tools/tool.html#mergepdf" class="btn btn-primary">Open Tool</a>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-4">
-        <div class="card tool-card p-3">
-          <h5>Compress PDF</h5>
-          <p>Reduce the file size of your PDFs.</p>
-          <a href="/Tools/tool.html#compresspdf" class="btn btn-primary">Open Tool</a>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-4">
-        <div class="card tool-card p-3">
-          <h5>Word to PDF</h5>
-          <p>Convert DOC or DOCX documents to PDF.</p>
-          <a href="/Tools/tool.html#word2pdf" class="btn btn-primary">Open Tool</a>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-4">
-        <div class="card tool-card p-3">
-          <h5>Excel to PDF</h5>
-          <p>Convert XLS or XLSX spreadsheets to PDF.</p>
-          <a href="/Tools/tool.html#excel2pdf" class="btn btn-primary">Open Tool</a>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-4">
-        <div class="card tool-card p-3">
-          <h5>PDF to Excel</h5>
-          <p>Convert PDF tables into Excel spreadsheets.</p>
-          <a href="/Tools/tool.html#pdf2excel" class="btn btn-primary">Open Tool</a>
-        </div>
-      </div>
-
+  <div class="container">
+    <div class="card">
+      <h3>Image Compression</h3>
+      <p>Reduce image size without losing quality</p>
+      <a href="/Tools/image-compression.html">Open Tool</a>
+    </div>
+    <div class="card">
+      <h3>JPG to PDF</h3>
+      <p>Convert JPG images to PDF instantly</p>
+      <a href="/Tools/jpg-to-pdf.html">Open Tool</a>
+    </div>
+    <div class="card">
+      <h3>PNG to JPG</h3>
+      <p>Convert PNG images to JPG easily</p>
+      <a href="/Tools/png-to-jpg.html">Open Tool</a>
+    </div>
+    <div class="card">
+      <h3>Image Resizer</h3>
+      <p>Resize images to desired dimensions</p>
+      <a href="/Tools/image-resizer.html">Open Tool</a>
+    </div>
+    <div class="card">
+      <h3>PDF to JPG</h3>
+      <p>Convert PDF pages into JPG images</p>
+      <a href="/Tools/pdf-to-jpg.html">Open Tool</a>
+    </div>
+    <div class="card">
+      <h3>Merge PDFs</h3>
+      <p>Combine multiple PDF files into one</p>
+      <a href="/Tools/merge-pdf.html">Open Tool</a>
+    </div>
+    <div class="card">
+      <h3>Compress PDF</h3>
+      <p>Reduce PDF file size efficiently</p>
+      <a href="/Tools/compress-pdf.html">Open Tool</a>
+    </div>
+    <div class="card">
+      <h3>Word to PDF</h3>
+      <p>Convert Word (.doc/.docx) files to PDF</p>
+      <a href="/Tools/word-to-pdf.html">Open Tool</a>
+    </div>
+    <div class="card">
+      <h3>Excel to PDF</h3>
+      <p>Convert Excel spreadsheets to PDF</p>
+      <a href="/Tools/excel-to-pdf.html">Open Tool</a>
+    </div>
+    <div class="card">
+      <h3>PDF to Excel</h3>
+      <p>Extract tables from PDF into Excel</p>
+      <a href="/Tools/pdf-to-excel.html">Open Tool</a>
     </div>
   </div>
 
-  <footer class="text-center py-4 bg-dark text-white">
-    <p>&copy; 2025 Image Compressor Pro. All rights reserved.</p>
+  <footer>
+    &copy; 2025 Image Compressor Pro. All rights reserved.
   </footer>
-
 </body>
+
 </html>
