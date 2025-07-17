@@ -1,205 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Optimize images and PDFs online with Image Compressor Pro. Convert, resize, merge and compress all major formats instantly!" />
-  <title>Image Compressor Pro - All-in-One File Optimizer</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="All-in-one responsive image and PDF tool suite for compression, conversion, and optimization.">
+  <meta name="keywords" content="Image compression, PDF tools, JPG to PDF, PNG to JPG, Image resizer, PDF merger, Word to PDF, Excel to PDF">
+  <meta name="author" content="Image Compressor Pro">
+  <title>Image & PDF Tool Suite</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background: #f4f4f4;
+      background-color: #f5f5f5;
     }
-    header, footer {
-      background: #333;
+
+    header {
+      background-color: #2d2dff;
       color: white;
       padding: 1rem;
       text-align: center;
     }
-    .container {
+
+    main {
+      padding: 1rem;
       display: grid;
-      gap: 2rem;
-      padding: 2rem;
-      max-width: 1200px;
-      margin: auto;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
     }
-    .tool {
+
+    .tool-card {
       background: white;
-      padding: 1.5rem;
       border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 1rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
-    h2 {
-      margin-top: 0;
-    }
-    input[type="file"], input[type="range"], button {
+
+    .tool-card input[type="file"] {
       display: block;
       margin: 1rem 0;
     }
-    .ad-space {
-      background: #ddd;
-      padding: 1rem;
-      text-align: center;
-      border-radius: 8px;
+
+    .tool-card .slider {
+      width: 100%;
     }
-    .download-link {
-      background: #4CAF50;
+
+    .tool-card button {
+      background-color: #2d2dff;
       color: white;
+      border: none;
       padding: 0.5rem 1rem;
-      text-decoration: none;
       border-radius: 5px;
-      display: inline-block;
+      cursor: pointer;
     }
-    @media (max-width: 768px) {
-      .container {
-        grid-template-columns: 1fr;
-      }
+
+    .ad-slot {
+      margin: 1rem 0;
+      text-align: center;
+    }
+
+    footer {
+      background: #222;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
     }
   </style>
 </head>
+
 <body>
   <header>
-    <h1>Image Compressor Pro</h1>
-    <p>Optimize and convert files quickly & efficiently</p>
+    <h1>Image & PDF Tool Suite</h1>
+    <p>Compress, Convert, and Optimize - All in one place</p>
   </header>
 
-  <div class="ad-space">
-    <!-- Google AdSense Code -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-9770610643444805"
-         data-ad-slot="4587389292"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-  </div>
+  <div class="ad-slot">
+      <!-- Replace with your Google AdSense code below -->
+      <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-9770610643444805"
+        data-ad-slot="4587389292"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    </div>
 
-  <main class="container">
+  <main id="tool-container">
     <!-- Image Compression Tool -->
-    <div class="tool">
-      <h2>Image Compressor</h2>
+    <div class="tool-card">
+      <h3>Image Compression</h3>
       <input type="file" accept="image/*" id="imgCompressInput">
-      <label for="compressLevel">Compression Level</label>
-      <input type="range" min="1" max="100" id="compressLevel">
+      <label>Compression Level:</label>
+      <input type="range" min="1" max="100" value="75" class="slider" id="imgCompressionRange">
       <button onclick="compressImage()">Compress</button>
-      <a id="imgCompressDownload" class="download-link" style="display:none">Download</a>
+      <a id="imgDownloadLink" download="compressed.jpg" style="display:none;">Download</a>
     </div>
 
-    <!-- Image to PDF -->
-    <div class="tool">
-      <h2>Image to PDF</h2>
-      <input type="file" accept="image/*" multiple id="imgToPdfInput">
-      <button onclick="convertImageToPDF()">Convert</button>
-      <a id="imgToPdfDownload" class="download-link" style="display:none">Download</a>
+    <div class="tool-card">
+      <h3>JPG Convert to PDF</h3>
+      <input type="file" accept="jpg/*" id="jpgInput">
+      <button onclick="jpgConverttoPDF()">Convert</button>
+      <a id="pdfDownloadLink" download="application/pdf" style="display:none;">Download</a>
     </div>
 
-    <!-- PNG to JPG -->
-    <div class="tool">
-      <h2>PNG to JPG</h2>
-      <input type="file" accept="image/png" id="pngToJpgInput">
-      <button onclick="convertPngToJpg()">Convert</button>
-      <a id="pngToJpgDownload" class="download-link" style="display:none">Download</a>
+    <div class="tool-card">
+      <h3>PNG Convert to JPG</h3>
+      <p>Convert PNG or WebP images Convert to JPG</p>
+      <input type="file" accept="png/*" id="pngInput">
+      <button onclick="pngConverttoJPG()">Convert</button>
+      <a id="jpgDownloadLink" download="jpg/*" style="display:none;">Download</a>
+    </div>
+    
+    <div class="tool-card">
+       <h3>Image Resizer</h3>
+       <input type="file" accept="image/*" id="imgInput"> 
+       <div class="tool-card-img" style="background: linear-gradient(135deg, #f72585 0%, #b5179e 100%);">
+       <i class="fas fa-crop" style="color: white; font-size: 3.5rem;"></i>
+       <p>Resize your images to any dimension while maintaining aspect ratio.</p>
+       <label>Compression Level:</label>
+       <button onclick="resizeImage()">Resize</button>
+       <a id="imgDownloadLink" download="compressed.jpg" style="display:none;">Download</a>
+    </div> 
+
+      <div class="tool-card">
+       <h3>Merge PDFs</h3>
+       <input type="file" accept="application/pdf" id="multiple.pdfInput">
+       <button onclick="Mergemultiplepdf()">Merge</button>
+       <a id="pdfDownloadLink" download="application/pdf" style="display:none;">Download</a>
+        <p>Combine multiple PDFs into one pdf</p>
+      </div>
+
+      <div class="tool-card">
+        <h3>PDF Convert to JPG</h3>
+        <input type="file" accept="application/pdf" id=".pdfInput">
+       <button onclick="pdfConverttoJPG()">Convert</button>
+        <a id="jpgDownloadLink" download="jpg/*" style="display:none;">Download</a>
     </div>
 
-    <!-- Image Resizer -->
-    <div class="tool">
-      <h2>Image Resizer</h2>
-      <input type="file" accept="image/*" id="imgResizeInput">
-      <label for="resizeLevel">Resize %</label>
-      <input type="range" min="10" max="100" id="resizeLevel">
-      <button onclick="resizeImage()">Resize</button>
-      <a id="imgResizeDownload" class="download-link" style="display:none">Download</a>
-    </div>
+      <div class="tool-card">
+        <h3>WORD Convert to PDF</h3>
+        <input type="file" accept="word" id="wordInput">
+       <button onclick="wordConverttopdf()">Convert</button>
+        <a id="pdfDownloadLink" download="application/pdf" style="display:none;">Download</a>
+      </div>
 
-    <!-- PDF to JPG -->
-    <div class="tool">
-      <h2>PDF to JPG</h2>
-      <input type="file" accept="application/pdf" id="pdfToJpgInput">
-      <button onclick="convertPdfToJpg()">Convert</button>
-      <a id="pdfToJpgDownload" class="download-link" style="display:none">Download</a>
-    </div>
+     <div class="tool-card">
+        <h3>EXCEL Convert to PDF</h3>
+        <input type="file" accept="excel" id="excelInput">
+       <button onclick="excelConverttopdf()">Convert</button>
+        <a id="pdfDownloadLink" download="application/pdf" style="display:none;">Download</a>
+      </div> 
 
-    <!-- Merge PDFs -->
-    <div class="tool">
-      <h2>Merge PDFs</h2>
-      <input type="file" accept="application/pdf" multiple id="pdfMergeInput">
-      <button onclick="mergePdfs()">Merge</button>
-      <a id="pdfMergeDownload" class="download-link" style="display:none">Download</a>
-    </div>
-
-    <!-- PDF Compressor -->
-    <div class="tool">
-      <h2>PDF Compressor</h2>
+      <div class="tool-card">
+        <h3>PDF Convert to EXCEL</h3>
+        <input type="file" accept="Application/pdf" id="pdfInput">
+       <button onclick="pdfConverttoexcel()">Convert</button>
+        <a id="excelDownloadLink" download="excel" style="display:none;">Download</a>
+      </div> 
+      
+    <div class="tool-card">
+      <h3>PDF Compressor</h3>
       <input type="file" accept="application/pdf" id="pdfCompressInput">
-      <label for="pdfCompressLevel">Compression Level</label>
-      <input type="range" min="1" max="100" id="pdfCompressLevel">
-      <button onclick="compressPdf()">Compress</button>
-      <a id="pdfCompressDownload" class="download-link" style="display:none">Download</a>
+      <label>Compression Level:</label>
+      <input type="range" min="1" max="100" value="75" class="slider" id="pdfCompressionRange">
+      <button onclick="compressPDF()">Compress PDF</button>
+      <a id="pdfDownloadLink" download="compressed.pdf" style="display:none;">Download</a>
     </div>
 
-    <!-- Word to PDF -->
-    <div class="tool">
-      <h2>Word to PDF</h2>
-      <input type="file" accept="application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" id="wordToPdfInput">
-      <button onclick="convertWordToPdf()">Convert</button>
-      <a id="wordToPdfDownload" class="download-link" style="display:none">Download</a>
-    </div>
-
-    <!-- Excel to PDF -->
-    <div class="tool">
-      <h2>Excel to PDF</h2>
-      <input type="file" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" id="excelToPdfInput">
-      <button onclick="convertExcelToPdf()">Convert</button>
-      <a id="excelToPdfDownload" class="download-link" style="display:none">Download</a>
-    </div>
-
-    <!-- PDF to Excel -->
-    <div class="tool">
-      <h2>PDF to Excel</h2>
-      <input type="file" accept="application/pdf" id="pdfToExcelInput">
-      <button onclick="convertPdfToExcel()">Convert</button>
-      <a id="pdfToExcelDownload" class="download-link" style="display:none">Download</a>
+    <!-- Ad Placeholder -->
+    <div class="ad-slot">
+      <!-- Replace with your Google AdSense code below -->
+      <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-9770610643444805"
+        data-ad-slot="4587389292"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
     </div>
   </main>
 
   <footer>
-    
-    <p>&copy; 2025 Image Compressor Pro. All rights reserved.</p>
+    &copy; 2025 Image Compressor Pro. All rights reserved.
   </footer>
 
-    <div class="ad-space">
-    <!-- Google AdSense Code -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-9770610643444805"
-         data-ad-slot="4587389292"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-  </div>
-  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
   <script>
-    // Example function for image compression — Extend logic with actual library (like Compressor.js)
-    function compressImage() {
-      const file = document.getElementById('imgCompressInput').files[0];
-      const level = document.getElementById('compressLevel').value;
-      if (file) {
-        alert(`Compressing ${file.name} at level ${level}% (functionality to be added)`);
-        document.getElementById('imgCompressDownload').style.display = 'inline-block';
-      }
+    async function compressImage() {
+      const input = document.getElementById('imgCompressInput');
+      const compressionLevel = document.getElementById('imgCompressionRange').value;
+      if (!input.files.length) return;
+      const file = input.files[0];
+      const img = new Image();
+      const reader = new FileReader();
+
+      reader.onload = function (e) {
+        img.src = e.target.result;
+      };
+
+      img.onload = function () {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+        canvas.toBlob((blob) => {
+          const link = document.getElementById('imgDownloadLink');
+          link.href = URL.createObjectURL(blob);
+          link.style.display = 'inline';
+        }, 'image/jpeg', compressionLevel / 100);
+      };
+
+      reader.readAsDataURL(file);
     }
-    // Add similar dummy implementations or integrate real ones using libraries like:
-    // - pdf-lib, jsPDF for PDFs
-    // - html2canvas, browser-image-compression
+
+    async function compressPDF() {
+      const input = document.getElementById('pdfCompressInput');
+      const compressionLevel = document.getElementById('pdfCompressionRange').value;
+      if (!input.files.length) return;
+      const file = input.files[0];
+      const uint8Array = await file.arrayBuffer();
+      const pdfDoc = await PDFLib.PDFDocument.load(uint8Array);
+      const pdfBytes = await pdfDoc.save({ useObjectStreams: false }); // simulate compression
+
+      const link = document.getElementById('pdfDownloadLink');
+      const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+      link.href = URL.createObjectURL(blob);
+      link.style.display = 'inline';
+    }
+
+    // Load AdSense script
+    (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
 </body>
+
 </html>
