@@ -269,6 +269,10 @@
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Add docx.js library for Word document processing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/docx.js/7.8.2/docx.js"></script>
+    <!-- Add pdf-lib for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
 </head>
 <body>
     <header>
@@ -502,35 +506,77 @@
             }
             
             // Handle convert button click
-            convertBtn.addEventListener('click', function() {
+            convertBtn.addEventListener('click', async function() {
                 if (!originalFile) return;
                 
                 // Show loading indicator
                 loadingIndicator.style.display = 'block';
                 resultsSection.style.display = 'none';
                 
-                // Get conversion settings
-                const quality = document.getElementById('quality').value;
-                const orientation = document.getElementById('orientation').value;
-                const margin = document.getElementById('margin').value;
-                
-                // Simulate conversion (in a real app, you would use a PDF library here)
-                setTimeout(() => {
-                    simulateConversion(originalFile, quality, orientation, margin)
-                        .then(pdf => {
-                            pdfBlob = pdf;
-                            displayResults(originalFile, pdfBlob);
-                            
-                            // Hide loading indicator
-                            loadingIndicator.style.display = 'none';
-                        })
-                        .catch(error => {
-                            console.error('Conversion error:', error);
-                            alert('An error occurred during conversion. Please try again.');
-                            loadingIndicator.style.display = 'none';
-                        });
-                }, 1500);
+                try {
+                    // Read the file as array buffer
+                    const arrayBuffer = await readFileAsArrayBuffer(originalFile);
+                    
+                    // Convert to PDF
+                    pdfBlob = await convertWordToPdf(arrayBuffer, originalFile.name);
+                    
+                    // Display results
+                    displayResults(originalFile, pdfBlob);
+                    
+                    // Hide loading indicator
+                    loadingIndicator.style.display = 'none';
+                } catch (error) {
+                    console.error('Conversion error:', error);
+                    alert('An error occurred during conversion. Please try again.');
+                    loadingIndicator.style.display = 'none';
+                }
             });
+            
+            // Read file as ArrayBuffer
+            function readFileAsArrayBuffer(file) {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onload = () => resolve(reader.result);
+                    reader.onerror = reject;
+                    reader.readAsArrayBuffer(file);
+                });
+            }
+            
+            // Convert Word to PDF
+            async function convertWordToPdf(arrayBuffer, fileName) {
+                // First, we'll extract text from the Word document
+                const { extractRawText } = await import('https://cdn.jsdelivr.net/npm/docx@7.8.2/build/index.js');
+                
+                // Extract text from the Word document
+                const text = await extractRawText(arrayBuffer);
+                
+                // Now create a PDF with the extracted text
+                const { PDFDocument, rgb } = PDFLib;
+                
+                // Create a new PDF document
+                const pdfDoc = await PDFDocument.create();
+                const page = pdfDoc.addPage([612, 792]); // Standard letter size
+                
+                // Draw the text on the PDF
+                const { width, height } = page.getSize();
+                const fontSize = 12;
+                const margin = 50;
+                
+                page.drawText(text, {
+                    x: margin,
+                    y: height - margin - fontSize,
+                    size: fontSize,
+                    color: rgb(0, 0, 0),
+                    maxWidth: width - margin * 2,
+                    lineHeight: fontSize * 1.2,
+                });
+                
+                // Save the PDF
+                const pdfBytes = await pdfDoc.save();
+                
+                // Create a blob from the PDF bytes
+                return new Blob([pdfBytes], { type: 'application/pdf' });
+            }
             
             // Handle download button click
             downloadBtn.addEventListener('click', function() {
@@ -563,65 +609,14 @@
                 `;
             });
             
-            // Simulate PDF conversion (in a real app, replace with actual PDF conversion)
-            function simulateConversion(file, quality, orientation, margin) {
-                return new Promise((resolve) => {
-                    // In a real implementation, you would use a library like pdf-lib or jsPDF here
-                    // This is just a simulation that creates a dummy PDF after a delay
-                    
-                    // Create a simple PDF blob (in reality, this would be your converted PDF)
-                    const pdfContent = `%PDF-1.4
-1 0 obj
-<< /Type /Catalog /Pages 2 0 R >>
-endobj
-2 0 obj
-<< /Type /Pages /Kids [3 0 R] /Count 1 >>
-endobj
-3 0 obj
-<< /Type /Page /Parent 2 0 R /Resources << >> /MediaBox [0 0 612 792] /Contents 4 0 R >>
-endobj
-4 0 obj
-<< /Length 44 >>
-stream
-BT /F1 12 Tf 100 700 Td (Converted PDF) Tj ET
-endstream
-endobj
-xref
-0 5
-0000000000 65535 f 
-0000000015 00000 n 
-0000000062 00000 n 
-0000000115 00000 n 
-0000000205 00000 n 
-trailer
-<< /Size 5 /Root 1 0 R >>
-startxref
-308
-%%EOF`;
-                    
-                    // Create a blob with about 30% size reduction from original to simulate compression
-                    const sizeReduction = quality === 'high' ? 0.2 : quality === 'medium' ? 0.4 : 0.6;
-                    const simulatedSize = Math.max(file.size * (1 - sizeReduction), 10000);
-                    
-                    // Create a blob with the simulated size
-                    const blob = new Blob([pdfContent], { type: 'application/pdf' });
-                    
-                    // We can't actually change the blob size, but we'll pretend
-                    blob.simulatedSize = simulatedSize;
-                    
-                    resolve(blob);
-                });
-            }
-            
             // Display results
             function displayResults(originalFile, pdfBlob) {
                 // Original file info
                 document.getElementById('originalFileName').textContent = originalFile.name;
                 document.getElementById('originalFileSize').textContent = formatFileSize(originalFile.size);
                 
-                // Converted file info (use simulated size if available)
-                const convertedSize = pdfBlob.simulatedSize || pdfBlob.size;
-                document.getElementById('convertedFileSize').textContent = formatFileSize(convertedSize);
+                // Converted file info
+                document.getElementById('convertedFileSize').textContent = formatFileSize(pdfBlob.size);
                 
                 // Show results
                 resultsSection.style.display = 'block';
