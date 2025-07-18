@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online tool to create beautiful photo collages with multiple layout options. Combine multiple images into one stunning collage.">
+    <meta name="keywords" content="photo collage maker, image collage, online collage creator, photo grid maker, picture collage, collage generator">
+    <meta name="author" content="CollageMakerPro">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Free Online Photo Collage Maker">
+    <meta property="og:description" content="Create beautiful photo collages with multiple layout options. Combine your favorite photos into one stunning image.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://raja1068.github.io/Tools/img-collage-maker.html">
+    <meta property="og:image" content="https://raja1068.github.io/Tools/img-collage-maker-preview.jpg">
+    <link rel="canonical" href="https://raja1068.github.io/Tools/img-collage-maker.html">
+    <title>Free Online Photo Collage Maker | Create Beautiful Collages</title>
+    <style>
+        :root {
+            --primary-color: #9c27b0;
+            --secondary-color: #7b1fa2;
+            --accent-color: #e91e63;
+            --light-gray: #f5f5f5;
+            --dark-gray: #333;
+            --medium-gray: #757575;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .ad-top, .ad-bottom {
+            background-color: var(--light-gray);
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+            border-radius: var(--border-radius);
+            border: 1px dashed #ccc;
+        }
+        
+        main {
+            padding: 40px 0;
+        }
+        
+        .collage-container {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 2.2rem;
+            text-align: center;
+        }
+        
+        .subtitle {
+            color: var(--medium-gray);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+        
+        .upload-area {
+            border: 2px dashed var(--primary-color);
+            border-radius: var(--border-radius);
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+            background-color: rgba(156, 39, 176, 0.05);
+        }
+        
+        .upload-area:hover {
+            background-color: rgba(156, 39, 176, 0.1);
+        }
+        
+        .upload-icon {
+            font-size: 48px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .control-group {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+        
+        select, input[type="range"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            background-color: white;
+        }
+        
+        input[type="range"] {
+            -webkit-appearance: none;
+            height: 8px;
+            background: #ddd;
+            border-radius: 5px;
+            padding: 0;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
+        }
+        
+        .range-value {
+            display: inline-block;
+            margin-left: 10px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            display: inline-block;
+        }
+        
+        .button:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .button-secondary {
+            background-color: var(--medium-gray);
+        }
+        
+        .button-secondary:hover {
+            background-color: #616161;
+        }
+        
+        .results {
+            display: none;
+            margin-top: 30px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .preview-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        #collagePreview {
+            max-width: 100%;
+            max-height: 600px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin: 0 auto;
+            display: block;
+        }
+        
+        .layout-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .layout-option {
+            width: 100px;
+            height: 80px;
+            border: 2px solid #ddd;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            flex-wrap: wrap;
+            overflow: hidden;
+        }
+        
+        .layout-option:hover {
+            border-color: var(--primary-color);
+        }
+        
+        .layout-option.active {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px var(--primary-color);
+        }
+        
+        .layout-cell {
+            background-color: rgba(156, 39, 176, 0.2);
+            border: 1px solid rgba(156, 39, 176, 0.3);
+        }
+        
+        .selected-images {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .selected-image {
+            width: 100px;
+            height: 100px;
+            border-radius: var(--border-radius);
+            object-fit: cover;
+            border: 2px solid #ddd;
+            position: relative;
+        }
+        
+        .remove-image {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            cursor: pointer;
+            border: 2px solid white;
+        }
+        
+        .download-btn {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        footer {
+            background-color: var(--dark-gray);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top: 4px solid var(--primary-color);
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .layout-option {
+                width: 80px;
+                height: 60px;
+            }
+            
+            .selected-image {
+                width: 80px;
+                height: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="/" class="logo">CollageMakerPro</a>
+            <nav>
+                <a href="#" class="button button-secondary">FAQ</a>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="ad-top">
+            <!-- Google AdSense Ad Unit -->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=pub-9770610643444805"
+                crossorigin="anonymous"></script>
+            <!-- Top Banner Ad -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-9770610643444805"
+                data-ad-slot="4587389292"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        <main>
+            <div class="collage-container">
+                <h1>Photo Collage Maker</h1>
+                <p class="subtitle">Create beautiful photo collages with multiple layout options. Combine your favorite photos into one stunning image.</p>
+                
+                <div id="uploadArea" class="upload-area">
+                    <div class="upload-icon">🖼️</div>
+                    <h3>Select Your Photos</h3>
+                    <p>Drag & drop images or click to browse</p>
+                    <input type="file" id="fileInput" class="file-input" accept="image/*" multiple>
+                </div>
+                
+                <div id="selectedImagesContainer" style="display: none;">
+                    <h3>Selected Images</h3>
+                    <div class="selected-images" id="selectedImages"></div>
+                </div>
+                
+                <div class="controls">
+                    <div class="control-group">
+                        <label for="layout">Collage Layout</label>
+                        <div class="layout-options" id="layoutOptions">
+                            <!-- Layout options will be added by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="spacing">Spacing: <span id="spacingValue" class="range-value">10px</span></label>
+                        <input type="range" id="spacing" min="0" max="30" value="10">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="background">Background Color</label>
+                        <select id="background">
+                            <option value="#ffffff">White</option>
+                            <option value="#000000">Black</option>
+                            <option value="#f5f5f5">Light Gray</option>
+                            <option value="#9c27b0">Purple</option>
+                            <option value="#2196f3">Blue</option>
+                            <option value="#4caf50">Green</option>
+                            <option value="#ff9800">Orange</option>
+                            <option value="#e91e63">Pink</option>
+                            <option value="transparent">Transparent</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div style="text-align: center;">
+                    <button id="createBtn" class="button" disabled>Create Collage</button>
+                </div>
+                
+                <div class="loading" id="loadingIndicator">
+                    <div class="spinner"></div>
+                    <p>Creating your collage...</p>
+                </div>
+                
+                <div class="results" id="resultsSection">
+                    <div class="preview-container">
+                        <h3>Your Collage Preview</h3>
+                        <canvas id="collagePreview"></canvas>
+                    </div>
+                    
+                    <div class="download-btn">
+                        <button id="downloadBtn" class="button">Download Collage</button>
+                        <select id="downloadFormat" style="margin-left: 10px; padding: 10px; border-radius: var(--border-radius);">
+                            <option value="png">PNG</option>
+                            <option value="jpeg">JPEG</option>
+                            <option value="webp">WebP</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <section class="seo-content">
+                <h2>Create Stunning Photo Collages in Minutes</h2>
+                <p>Our free online collage maker helps you combine multiple photos into beautiful layouts perfect for social media, photo albums, posters, and more. With various layout options and customization features, you can create professional-looking collages without any design skills.</p>
+                
+                <h3>Why Use Our Collage Maker?</h3>
+                <ul>
+                    <li><strong>Multiple layout options:</strong> Choose from various grid and creative layouts</li>
+                    <li><strong>Fully customizable:</strong> Adjust spacing, background color, and more</li>
+                    <li><strong>High quality output:</strong> Download your collage in PNG, JPEG, or WebP format</li>
+                    <li><strong>No registration required:</strong> Free to use with no sign-up needed</li>
+                    <li><strong>Works on any device:</strong> Create collages on desktop, tablet, or mobile</li>
+                </ul>
+                
+                <h3>How to Create a Collage</h3>
+                <ol>
+                    <li>Upload your photos by dragging and dropping or clicking to browse</li>
+                    <li>Select your preferred collage layout</li>
+                    <li>Customize spacing and background color</li>
+                    <li>Click "Create Collage" to generate your design</li>
+                    <li>Download your finished collage in your preferred format</li>
+                </ol>
+                
+                <h3>Perfect For</h3>
+                <p>Instagram posts, Facebook covers, wedding albums, birthday invitations, vacation memories, family portraits, mood boards, and much more!</p>
+            </section>
+        </main>
+        
+        <div class="ad-bottom">
+            <!-- Google AdSense Ad Unit -->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+                crossorigin="anonymous"></script>
+            <!-- Bottom Banner Ad -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-9770610643444805"
+                data-ad-slot="4587389292"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/terms">Terms of Service</a>
+                <a href="/contact">Contact Us</a>
+                <a href="/blog">Blog</a>
+            </div>
+            <p>&copy; <span id="currentYear"></span> CollageMakerPro. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current year in footer
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
+            // DOM elements
+            const fileInput = document.getElementById('fileInput');
+            const uploadArea = document.getElementById('uploadArea');
+            const selectedImagesContainer = document.getElementById('selectedImagesContainer');
+            const selectedImages = document.getElementById('selectedImages');
+            const createBtn = document.getElementById('createBtn');
+            const spacingSlider = document.getElementById('spacing');
+            const spacingValue = document.getElementById('spacingValue');
+            const resultsSection = document.getElementById('resultsSection');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const collagePreview = document.getElementById('collagePreview');
+            const layoutOptions = document.getElementById('layoutOptions');
+            const downloadBtn = document.getElementById('downloadBtn');
+            
+            // Variables to store images and collage data
+            let uploadedImages = [];
+            let currentLayout = '2x2';
+            let collageCanvas = document.createElement('canvas');
+            let collageCtx = collageCanvas.getContext('2d');
+            
+            // Layout definitions
+            const layouts = {
+                '2x2': { rows: 2, cols: 2, name: '2×2 Grid' },
+                '3x3': { rows: 3, cols: 3, name: '3×3 Grid' },
+                '1x3': { rows: 1, cols: 3, name: '1×3 Horizontal' },
+                '3x1': { rows: 3, cols: 1, name: '3×1 Vertical' },
+                '1x2': { rows: 1, cols: 2, name: '1×2 Horizontal' },
+                '2x1': { rows: 2, cols: 1, name: '2×1 Vertical' },
+                'left-large': { rows: 2, cols: 2, name: 'Left Large', template: [
+                    [1, 0],
+                    [1, 1]
+                ]},
+                'right-large': { rows: 2, cols: 2, name: 'Right Large', template: [
+                    [0, 1],
+                    [1, 1]
+                ]},
+                'top-large': { rows: 2, cols: 2, name: 'Top Large', template: [
+                    [1, 1],
+                    [0, 1]
+                ]},
+                'bottom-large': { rows: 2, cols: 2, name: 'Bottom Large', template: [
+                    [1, 0],
+                    [1, 1]
+                ]}
+            };
+            
+            // Create layout options
+            function createLayoutOptions() {
+                layoutOptions.innerHTML = '';
+                
+                for (const [key, layout] of Object.entries(layouts)) {
+                    const option = document.createElement('div');
+                    option.className = 'layout-option';
+                    option.dataset.layout = key;
+                    option.title = layout.name;
+                    
+                    // Create visual representation of layout
+                    const rows = layout.template || Array(layout.rows).fill().map(() => Array(layout.cols).fill(1));
+                    
+                    for (let i = 0; i < rows.length; i++) {
+                        for (let j = 0; j < rows[i].length; j++) {
+                            if (rows[i][j]) {
+                                const cell = document.createElement('div');
+                                cell.className = 'layout-cell';
+                                cell.style.width = `${100 / rows[i].length}%`;
+                                cell.style.height = `${100 / rows.length}%`;
+                                option.appendChild(cell);
+                            }
+                        }
+                    }
+                    
+                    option.addEventListener('click', function() {
+                        document.querySelectorAll('.layout-option').forEach(opt => opt.classList.remove('active'));
+                        this.classList.add('active');
+                        currentLayout = key;
+                    });
+                    
+                    layoutOptions.appendChild(option);
+                }
+                
+                // Activate first layout by default
+                layoutOptions.firstChild.classList.add('active');
+            }
+            
+            // Initialize layout options
+            createLayoutOptions();
+            
+            // Update spacing value display
+            spacingSlider.addEventListener('input', function() {
+                spacingValue.textContent = this.value + 'px';
+            });
+            
+            // Handle drag and drop
+            uploadArea.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                this.style.backgroundColor = 'rgba(156, 39, 176, 0.2)';
+            });
+            
+            uploadArea.addEventListener('dragleave', function() {
+                this.style.backgroundColor = 'rgba(156, 39, 176, 0.05)';
+            });
+            
+            uploadArea.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.style.backgroundColor = 'rgba(156, 39, 176, 0.05)';
+                
+                if (e.dataTransfer.files.length) {
+                    fileInput.files = e.dataTransfer.files;
+                    handleFileSelection();
+                }
+            });
+            
+            // Handle click to browse
+            uploadArea.addEventListener('click', function() {
+                fileInput.click();
+            });
+            
+            // Handle file selection
+            fileInput.addEventListener('change', handleFileSelection);
+            
+            function handleFileSelection() {
+                if (fileInput.files && fileInput.files.length > 0) {
+                    uploadedImages = [];
+                    selectedImages.innerHTML = '';
+                    
+                    // Process each file
+                    Array.from(fileInput.files).forEach((file, index) => {
+                        // Check if file is an image
+                        if (!file.type.match('image.*')) {
+                            return;
+                        }
+                        
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            const img = new Image();
+                            img.onload = function() {
+                                uploadedImages.push({
+                                    file: file,
+                                    element: img,
+                                    src: e.target.result
+                                });
+                                
+                                // Add to selected images display
+                                const imgContainer = document.createElement('div');
+                                imgContainer.style.position = 'relative';
+                                
+                                const imgElement = document.createElement('img');
+                                imgElement.src = e.target.result;
+                                imgElement.className = 'selected-image';
+                                
+                                const removeBtn = document.createElement('div');
+                                removeBtn.className = 'remove-image';
+                                removeBtn.innerHTML = '×';
+                                removeBtn.addEventListener('click', function() {
+                                    imgContainer.remove();
+                                    uploadedImages = uploadedImages.filter(img => img.src !== e.target.result);
+                                    if (uploadedImages.length === 0) {
+                                        selectedImagesContainer.style.display = 'none';
+                                        createBtn.disabled = true;
+                                    }
+                                });
+                                
+                                imgContainer.appendChild(imgElement);
+                                imgContainer.appendChild(removeBtn);
+                                selectedImages.appendChild(imgContainer);
+                                
+                                // Show selected images container
+                                selectedImagesContainer.style.display = 'block';
+                                
+                                // Enable create button if we have at least one image
+                                if (uploadedImages.length > 0) {
+                                    createBtn.disabled = false;
+                                }
+                            };
+                            img.src = e.target.result;
+                        };
+                        reader.readAsDataURL(file);
+                    });
+                }
+            }
+            
+            // Handle create button click
+            createBtn.addEventListener('click', function() {
+                if (uploadedImages.length === 0) return;
+                
+                // Show loading indicator
+                loadingIndicator.style.display = 'block';
+                resultsSection.style.display = 'none';
+                
+                // Process collage after a small delay to allow UI to update
+                setTimeout(() => {
+                    createCollage();
+                    
+                    // Hide loading indicator
+                    loadingIndicator.style.display = 'none';
+                }, 100);
+            });
+            
+            // Handle download button click
+            downloadBtn.addEventListener('click', function() {
+                if (!collageCanvas) return;
+                
+                const format = document.getElementById('downloadFormat').value;
+                const mimeType = `image/${format}`;
+                const fileName = `collage_${new Date().getTime()}.${format}`;
+                
+                collageCanvas.toBlob(function(blob) {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = fileName;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                }, mimeType, 0.95);
+            });
+            
+            // Collage creation function
+            function createCollage() {
+                const layout = layouts[currentLayout];
+                const spacing = parseInt(spacingSlider.value);
+                const bgColor = document.getElementById('background').value;
+                
+                // Determine cell positions based on layout
+                let cellMap;
+                if (layout.template) {
+                    cellMap = layout.template;
+                } else {
+                    cellMap = Array(layout.rows).fill().map(() => Array(layout.cols).fill(1));
+                }
+                
+                // Calculate number of cells needed
+                const cellCount = cellMap.flat().filter(cell => cell === 1).length;
+                const imagesToUse = uploadedImages.slice(0, cellCount);
+                
+                // Calculate collage dimensions (use first image's aspect ratio as base)
+                const baseAspect = imagesToUse[0].element.width / imagesToUse[0].element.height;
+                const collageWidth = 1000;
+                const collageHeight = collageWidth / baseAspect;
+                
+                // Set canvas dimensions
+                collageCanvas.width = collageWidth;
+                collageCanvas.height = collageHeight;
+                
+                // Fill background
+                collageCtx.fillStyle = bgColor;
+                collageCtx.fillRect(0, 0, collageWidth, collageHeight);
+                
+                // Calculate cell dimensions
+                const cellWidth = (collageWidth - (spacing * (cellMap[0].length + 1))) / cellMap[0].length;
+                const cellHeight = (collageHeight - (spacing * (cellMap.length + 1))) / cellMap.length;
+                
+                // Draw images in cells
+                let imageIndex = 0;
+                for (let row = 0; row < cellMap.length; row++) {
+                    for (let col = 0; col < cellMap[row].length; col++) {
+                        if (cellMap[row][col] === 1 && imageIndex < imagesToUse.length) {
+                            const img = imagesToUse[imageIndex].element;
+                            const x = spacing + (col * (cellWidth + spacing));
+                            const y = spacing + (row * (cellHeight + spacing));
+                            
+                            // Calculate dimensions to maintain aspect ratio
+                            let drawWidth = cellWidth;
+                            let drawHeight = cellHeight;
+                            const imgAspect = img.width / img.height;
+                            const cellAspect = cellWidth / cellHeight;
+                            
+                            if (imgAspect > cellAspect) {
+                                drawHeight = cellWidth / imgAspect;
+                            } else {
+                                drawWidth = cellHeight * imgAspect;
+                            }
+                            
+                            // Center the image in the cell
+                            const offsetX = (cellWidth - drawWidth) / 2;
+                            const offsetY = (cellHeight - drawHeight) / 2;
+                            
+                            collageCtx.drawImage(img, x + offsetX, y + offsetY, drawWidth, drawHeight);
+                            imageIndex++;
+                        }
+                    }
+                }
+                
+                // Update preview
+                const previewCtx = collagePreview.getContext('2d');
+                collagePreview.width = collageCanvas.width;
+                collagePreview.height = collageCanvas.height;
+                previewCtx.drawImage(collageCanvas, 0, 0);
+                
+                // Show results
+                resultsSection.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
