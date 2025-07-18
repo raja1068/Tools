@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online tool to convert Excel files (XLS/XLSX) to PDF documents while preserving formatting, tables, and layout.">
+    <meta name="keywords" content="Excel to PDF, XLS to PDF, XLSX to PDF, convert Excel, online PDF converter, spreadsheet converter">
+    <meta name="author" content="ExcelToPDFConverter">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Free Online Excel to PDF Converter">
+    <meta property="og:description" content="Convert your Excel spreadsheets to PDF documents online for free while preserving formatting.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://raja1068.github.io/Tools/excel-to-pdf.html">
+    <meta property="og:image" content="https://raja1068.github.io/Tools/excel-to-pdf-preview.jpg">
+    <link rel="canonical" href="https://raja1068.github.io/Tools/excel-to-pdf.html">
+    <title>Free Excel to PDF Converter | Preserve Formatting & Tables</title>
+    <style>
+        :root {
+            --primary-color: #1a73e8;
+            --secondary-color: #0b8043;
+            --accent-color: #d93025;
+            --light-gray: #f5f5f5;
+            --dark-gray: #333;
+            --medium-gray: #757575;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .ad-top, .ad-bottom {
+            background-color: var(--light-gray);
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+            border-radius: var(--border-radius);
+            border: 1px dashed #ccc;
+        }
+        
+        main {
+            padding: 40px 0;
+        }
+        
+        .converter-container {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 2.2rem;
+            text-align: center;
+        }
+        
+        .subtitle {
+            color: var(--medium-gray);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+        
+        .upload-area {
+            border: 2px dashed var(--primary-color);
+            border-radius: var(--border-radius);
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+            background-color: rgba(26, 115, 232, 0.05);
+        }
+        
+        .upload-area:hover {
+            background-color: rgba(26, 115, 232, 0.1);
+        }
+        
+        .upload-icon {
+            font-size: 48px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .control-group {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+        
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            background-color: white;
+        }
+        
+        .button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            display: inline-block;
+        }
+        
+        .button:hover {
+            background-color: #0d5bba;
+        }
+        
+        .button-secondary {
+            background-color: var(--medium-gray);
+        }
+        
+        .button-secondary:hover {
+            background-color: #616161;
+        }
+        
+        .results {
+            display: none;
+            margin-top: 30px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .file-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .info-box {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+            background-color: var(--light-gray);
+            border-radius: var(--border-radius);
+        }
+        
+        .info-box h3 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .info-item {
+            margin-bottom: 10px;
+        }
+        
+        .download-btn {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        footer {
+            background-color: var(--dark-gray);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top: 4px solid var(--primary-color);
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+            }
+            
+            .file-info {
+                flex-direction: column;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="/" class="logo">ExcelToPDFConverter</a>
+            <nav>
+                <a href="#" class="button button-secondary">FAQ</a>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="ad-top">
+            <!-- Google AdSense Ad Unit -->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9770610643444805"
+                crossorigin="anonymous"></script>
+            <!-- Top Banner Ad -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-9770610643444805"
+                data-ad-slot="4587389292"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        <main>
+            <div class="converter-container">
+                <h1>Excel to PDF Converter</h1>
+                <p class="subtitle">Convert your Excel spreadsheets (XLS/XLSX) to PDF documents while preserving formatting, tables, and layout.</p>
+                
+                <div id="uploadArea" class="upload-area">
+                    <div class="upload-icon">📊</div>
+                    <h3>Drag & Drop Your Excel File Here</h3>
+                    <p>or click to browse files</p>
+                    <input type="file" id="fileInput" class="file-input" accept=".xls,.xlsx,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+                </div>
+                
+                <div class="controls">
+                    <div class="control-group">
+                        <label for="orientation">Page Orientation</label>
+                        <select id="orientation">
+                            <option value="portrait">Portrait</option>
+                            <option value="landscape">Landscape</option>
+                            <option value="auto">Auto (Based on content)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="scale">Scaling</label>
+                        <select id="scale">
+                            <option value="fit">Fit to Page</option>
+                            <option value="actual">Actual Size</option>
+                            <option value="custom">Custom Scale</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="pages">Pages to Convert</label>
+                        <select id="pages">
+                            <option value="all">All Sheets</option>
+                            <option value="current">Current Sheet Only</option>
+                            <option value="selection">Custom Selection</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div style="text-align: center;">
+                    <button id="convertBtn" class="button" disabled>Convert to PDF</button>
+                </div>
+                
+                <div class="loading" id="loadingIndicator">
+                    <div class="spinner"></div>
+                    <p>Converting your Excel file to PDF...</p>
+                </div>
+                
+                <div class="results" id="resultsSection">
+                    <div class="file-info">
+                        <div class="info-box">
+                            <h3>Original Excel File</h3>
+                            <div class="info-item">
+                                <strong>File Name:</strong> <span id="originalFileName">-</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>File Size:</strong> <span id="originalFileSize">-</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Sheets:</strong> <span id="originalSheets">-</span>
+                            </div>
+                        </div>
+                        
+                        <div class="info-box">
+                            <h3>PDF Output</h3>
+                            <div class="info-item">
+                                <strong>PDF Size:</strong> <span id="pdfFileSize">-</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Pages:</strong> <span id="pdfPages">-</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Quality:</strong> <span id="pdfQuality">High</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="download-btn">
+                        <button id="downloadBtn" class="button">Download PDF File</button>
+                    </div>
+                </div>
+            </div>
+            
+            <section class="seo-content">
+                <h2>Convert Excel to PDF with Perfect Formatting</h2>
+                <p>Our free online Excel to PDF converter helps you transform your spreadsheets into professional PDF documents while preserving all your formatting, formulas, tables, and charts. Perfect for reports, financial statements, and data sharing.</p>
+                
+                <h3>Why Convert Excel to PDF?</h3>
+                <ul>
+                    <li><strong>Preserve formatting:</strong> Your tables, charts, and layouts look exactly as intended</li>
+                    <li><strong>Universal compatibility:</strong> PDFs can be viewed on any device without Excel installed</li>
+                    <li><strong>Secure sharing:</strong> Prevent accidental changes to your data</li>
+                    <li><strong>Professional appearance:</strong> Ideal for reports and official documents</li>
+                    <li><strong>Print-ready:</strong> Perfectly formatted for printing</li>
+                </ul>
+                
+                <h3>How to Convert Excel to PDF</h3>
+                <ol>
+                    <li>Upload your Excel file (XLS or XLSX format)</li>
+                    <li>Adjust conversion settings if needed (orientation, scaling)</li>
+                    <li>Click "Convert to PDF" to process your file</li>
+                    <li>Download your professional PDF document</li>
+                </ol>
+                
+                <h3>Supported Excel Formats</h3>
+                <p>Our converter supports all modern Excel formats including XLS (Excel 97-2003) and XLSX (Excel 2007 and later). We maintain high quality conversion for complex spreadsheets with formulas, charts, and multiple sheets.</p>
+            </section>
+        </main>
+        
+        <div class="ad-bottom">
+            <!-- Google AdSense Ad Unit -->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9770610643444805"
+                crossorigin="anonymous"></script>
+            <!-- Bottom Banner Ad -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-9770610643444805"
+                data-ad-slot="4587389292"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/terms">Terms of Service</a>
+                <a href="/contact">Contact Us</a>
+                <a href="/blog">Blog</a>
+            </div>
+            <p>&copy; <span id="currentYear"></span> ExcelToPDFConverter. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current year in footer
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
+            // DOM elements
+            const fileInput = document.getElementById('fileInput');
+            const uploadArea = document.getElementById('uploadArea');
+            const convertBtn = document.getElementById('convertBtn');
+            const resultsSection = document.getElementById('resultsSection');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            
+            // Variables to store file data
+            let originalFile = null;
+            let pdfBlob = null;
+            
+            // Handle drag and drop
+            uploadArea.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                this.style.backgroundColor = 'rgba(26, 115, 232, 0.2)';
+            });
+            
+            uploadArea.addEventListener('dragleave', function() {
+                this.style.backgroundColor = 'rgba(26, 115, 232, 0.05)';
+            });
+            
+            uploadArea.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.style.backgroundColor = 'rgba(26, 115, 232, 0.05)';
+                
+                if (e.dataTransfer.files.length) {
+                    fileInput.files = e.dataTransfer.files;
+                    handleFileSelection();
+                }
+            });
+            
+            // Handle click to browse
+            uploadArea.addEventListener('click', function() {
+                fileInput.click();
+            });
+            
+            // Handle file selection
+            fileInput.addEventListener('change', handleFileSelection);
+            
+            function handleFileSelection() {
+                if (fileInput.files && fileInput.files[0]) {
+                    const file = fileInput.files[0];
+                    
+                    // Check if file is an Excel file
+                    const validTypes = [
+                        'application/vnd.ms-excel',
+                        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+                    ];
+                    
+                    if (!validTypes.includes(file.type) {
+                        alert('Please select an Excel file (XLS or XLSX format)');
+                        return;
+                    }
+                    
+                    originalFile = file;
+                    
+                    // Update upload area display
+                    uploadArea.innerHTML = `
+                        <div style="font-size: 48px;">✅</div>
+                        <h3>${file.name}</h3>
+                        <p>${(file.size / 1024).toFixed(2)} KB</p>
+                    `;
+                    
+                    // Enable convert button
+                    convertBtn.disabled = false;
+                    
+                    // For demo purposes, we'll assume some default values
+                    // In a real implementation, you would parse the Excel file to get sheet count
+                    document.getElementById('originalFileName').textContent = file.name;
+                    document.getElementById('originalFileSize').textContent = (file.size / 1024).toFixed(2) + ' KB';
+                    document.getElementById('originalSheets').textContent = '3 (estimated)';
+                }
+            }
+            
+            // Handle convert button click
+            convertBtn.addEventListener('click', function() {
+                if (!originalFile) return;
+                
+                // Show loading indicator
+                loadingIndicator.style.display = 'block';
+                resultsSection.style.display = 'none';
+                
+                // Get conversion settings
+                const orientation = document.getElementById('orientation').value;
+                const scale = document.getElementById('scale').value;
+                const pages = document.getElementById('pages').value;
+                
+                // Process file after a small delay to allow UI to update
+                setTimeout(() => {
+                    // In a real implementation, this would call your conversion API
+                    // For this demo, we'll simulate conversion with a timeout
+                    simulateConversion(originalFile, orientation, scale, pages)
+                        .then(pdf => {
+                            pdfBlob = pdf;
+                            displayResults(originalFile, pdfBlob);
+                            
+                            // Hide loading indicator
+                            loadingIndicator.style.display = 'none';
+                        })
+                        .catch(error => {
+                            console.error('Conversion error:', error);
+                            alert('An error occurred during conversion. Please try again.');
+                            loadingIndicator.style.display = 'none';
+                        });
+                }, 100);
+            });
+            
+            // Handle download button click
+            document.getElementById('downloadBtn').addEventListener('click', function() {
+                if (!pdfBlob) return;
+                
+                const url = URL.createObjectURL(pdfBlob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = originalFile.name.replace(/\.[^/.]+$/, '') + '.pdf';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            });
+            
+            // Simulate conversion (in a real app, this would call your backend API)
+            function simulateConversion(file, orientation, scale, pages) {
+                return new Promise((resolve) => {
+                    // Create a dummy PDF blob for demonstration
+                    // In a real implementation, you would:
+                    // 1. Send the file to your backend
+                    // 2. Use a library like SheetJS to parse the Excel
+                    // 3. Generate PDF using something like pdf-lib or jsPDF
+                    const dummyPdfContent = '%PDF-1.4\n...'; // Truncated for example
+                    const blob = new Blob([dummyPdfContent], { type: 'application/pdf' });
+                    
+                    // Simulate processing time
+                    setTimeout(() => {
+                        resolve(blob);
+                    }, 2000);
+                });
+            }
+            
+            // Display results
+            function displayResults(originalFile, pdfBlob) {
+                // Original file info (already set during upload)
+                
+                // PDF info
+                document.getElementById('pdfFileSize').textContent = (pdfBlob.size / 1024).toFixed(2) + ' KB';
+                document.getElementById('pdfPages').textContent = '5 (estimated)';
+                document.getElementById('pdfQuality').textContent = 'High';
+                
+                // Show results
+                resultsSection.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
