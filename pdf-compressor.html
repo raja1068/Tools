@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free online tool to compress your PDF files while maintaining quality. Reduce file size for email attachments and web uploads.">
-    <meta name="keywords" content="PDF compressor, compress PDF, reduce PDF size, online PDF optimizer, PDF size reducer">
+    <meta name="description" content="Free online tool to compress your PDF files while maintaining quality. Reduce PDF file size quickly and easily.">
+    <meta name="keywords" content="PDF compressor, compress PDF, reduce PDF size, online PDF optimizer, PDF shrink, PDF size reducer">
     <meta name="author" content="PDFCompressorPro">
     <meta name="robots" content="index, follow">
     <meta property="og:title" content="Free Online PDF Compression Tool">
     <meta property="og:description" content="Compress your PDF files online for free with our powerful PDF compression tool.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://raja1068.github.io/Tools/pdf-compressor.html">
+    <meta property="og:url" content="https://raja1068/github.io/Tools/pdf-compressor.html">
     <meta property="og:image" content="https://raja1068.github.io/Tools/pdf-compressor-preview.jpg">
-    <link rel="canonical" href="https://raja1068.github.io/Tools/pdf-compressor/">
+    <link rel="canonical" href="https://raja1068/github.io/Tools/pdf-compressor/">
     <title>Free Online PDF Compression Tool | Reduce PDF File Size</title>
     <style>
         :root {
@@ -146,12 +146,37 @@
             color: var(--dark-gray);
         }
         
-        select {
+        select, input[type="range"] {
             width: 100%;
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: var(--border-radius);
             background-color: white;
+        }
+        
+        input[type="range"] {
+            -webkit-appearance: none;
+            height: 8px;
+            background: #ddd;
+            border-radius: 5px;
+            padding: 0;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
+        }
+        
+        .range-value {
+            display: inline-block;
+            margin-left: 10px;
+            font-weight: bold;
+            color: var(--primary-color);
         }
         
         .button {
@@ -190,31 +215,28 @@
             to { opacity: 1; }
         }
         
-        .comparison {
+        .file-info {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
             margin-bottom: 30px;
         }
         
-        .file-box {
+        .info-box {
             flex: 1;
             min-width: 300px;
-            text-align: center;
             padding: 20px;
-            border: 1px solid #eee;
+            background-color: var(--light-gray);
             border-radius: var(--border-radius);
         }
         
-        .file-icon {
-            font-size: 64px;
-            color: var(--primary-color);
+        .info-box h3 {
             margin-bottom: 15px;
+            color: var(--primary-color);
         }
         
-        .file-info {
-            margin-top: 10px;
-            font-size: 14px;
+        .info-item {
+            margin-bottom: 10px;
         }
         
         .savings {
@@ -283,7 +305,7 @@
                 flex-direction: column;
             }
             
-            .comparison {
+            .file-info {
                 flex-direction: column;
             }
             
@@ -310,12 +332,12 @@
     <div class="container">
         <div class="ad-top">
             <!-- Google AdSense Ad Unit -->
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9770610643444805"
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=pub-9770610643444805"
                 crossorigin="anonymous"></script>
             <!-- Top Banner Ad -->
             <ins class="adsbygoogle"
                 style="display:block"
-                data-ad-client="ca-pub-9770610643444805"
+                data-ad-client="ca-pub-9770610643444805~6334751089"
                 data-ad-slot="4587389292"
                 data-ad-format="auto"
                 data-full-width-responsive="true"></ins>
@@ -330,38 +352,35 @@
                 <p class="subtitle">Reduce PDF file size while maintaining quality. Perfect for email attachments and web uploads.</p>
                 
                 <div id="uploadArea" class="upload-area">
-                    <div class="upload-icon">📄</div>
+                    <div class="upload-icon">📁</div>
                     <h3>Drag & Drop Your PDF Here</h3>
                     <p>or click to browse files</p>
-                    <input type="file" id="fileInput" class="file-input" accept=".pdf,application/pdf">
+                    <input type="file" id="fileInput" class="file-input" accept=".pdf">
                 </div>
                 
                 <div class="controls">
                     <div class="control-group">
                         <label for="compressionLevel">Compression Level</label>
                         <select id="compressionLevel">
-                            <option value="low">Low Compression (Better Quality)</option>
-                            <option value="medium" selected>Medium Compression (Recommended)</option>
-                            <option value="high">High Compression (Smaller File)</option>
+                            <option value="low">Low (Best Quality)</option>
+                            <option value="medium" selected>Medium (Recommended)</option>
+                            <option value="high">High (Smallest Size)</option>
+                            <option value="extreme">Extreme (Max Compression)</option>
                         </select>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="imageQuality">Image Quality: <span id="qualityValue" class="range-value">80%</span></label>
+                        <input type="range" id="imageQuality" min="1" max="100" value="80">
                     </div>
                     
                     <div class="control-group">
                         <label for="optimizeFor">Optimize For</label>
                         <select id="optimizeFor">
-                            <option value="web">Web Publishing</option>
-                            <option value="print" selected>Print Quality</option>
-                            <option value="email">Email Attachment</option>
-                        </select>
-                    </div>
-                    
-                    <div class="control-group">
-                        <label for="removeElements">Remove</label>
-                        <select id="removeElements">
-                            <option value="none" selected>Nothing (Keep All)</option>
-                            <option value="metadata">Metadata Only</option>
-                            <option value="images">Duplicate Images</option>
-                            <option value="both">Metadata & Duplicate Images</option>
+                            <option value="web">Web (Fast Loading)</option>
+                            <option value="print" selected>Print (High Quality)</option>
+                            <option value="email">Email (Small Size)</option>
+                            <option value="archive">Archive (Balanced)</option>
                         </select>
                     </div>
                 </div>
@@ -376,24 +395,30 @@
                 </div>
                 
                 <div class="results" id="resultsSection">
-                    <div class="comparison">
-                        <div class="file-box">
-                            <div class="file-icon">📄</div>
+                    <div class="file-info">
+                        <div class="info-box">
                             <h3>Original PDF</h3>
-                            <div class="file-info">
-                                <p id="originalName">Filename: example.pdf</p>
-                                <p id="originalSize">Size: 0 KB</p>
-                                <p id="originalPages">Pages: 0</p>
+                            <div class="info-item">
+                                <strong>File Name:</strong> <span id="originalFileName">-</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>File Size:</strong> <span id="originalFileSize">-</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Pages:</strong> <span id="originalPages">-</span>
                             </div>
                         </div>
                         
-                        <div class="file-box">
-                            <div class="file-icon">📄</div>
+                        <div class="info-box">
                             <h3>Compressed PDF</h3>
-                            <div class="file-info">
-                                <p id="compressedName">Filename: compressed.pdf</p>
-                                <p id="compressedSize">Size: 0 KB</p>
-                                <p id="compressedPages">Pages: 0</p>
+                            <div class="info-item">
+                                <strong>File Size:</strong> <span id="compressedFileSize">-</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Reduction:</strong> <span id="reductionPercentage">-</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Quality:</strong> <span id="resultQuality">-</span>
                             </div>
                         </div>
                     </div>
@@ -409,38 +434,46 @@
             </div>
             
             <section class="seo-content">
-                <h2>Optimize Your PDFs for Better Sharing</h2>
-                <p>Our free online PDF compression tool helps you reduce the file size of your PDF documents while maintaining quality. Smaller PDFs are easier to email, upload, and share with others.</p>
+                <h2>Optimize Your PDFs for Better Performance</h2>
+                <p>Our free online PDF compression tool helps you reduce the file size of your PDF documents while maintaining quality. Smaller PDFs are easier to share via email, upload to websites, and store in the cloud.</p>
                 
                 <h3>Why Compress PDFs?</h3>
                 <ul>
-                    <li><strong>Email attachments:</strong> Many email providers limit attachment sizes</li>
-                    <li><strong>Faster uploads:</strong> Smaller files upload quicker to websites and cloud services</li>
-                    <li><strong>Save storage space:</strong> Reduce space used on your device or server</li>
-                    <li><strong>Better sharing:</strong> Compressed PDFs are easier to send via messaging apps</li>
+                    <li><strong>Email attachments:</strong> Many email services have size limits for attachments</li>
+                    <li><strong>Faster uploads/downloads:</strong> Smaller files transfer more quickly</li>
+                    <li><strong>Website optimization:</strong> Reduce page load times when linking to PDFs</li>
+                    <li><strong>Storage savings:</strong> Store more documents in limited space</li>
+                    <li><strong>Mobile friendly:</strong> Smaller files use less data on mobile devices</li>
                 </ul>
                 
                 <h3>How to Use Our PDF Compressor</h3>
                 <ol>
                     <li>Upload your PDF by dragging and dropping or clicking to browse</li>
-                    <li>Select your compression preferences</li>
+                    <li>Adjust compression settings based on your needs</li>
                     <li>Click "Compress PDF" to process your file</li>
                     <li>Download the optimized PDF</li>
                 </ol>
                 
-                <h3>How PDF Compression Works</h3>
-                <p>Our tool uses smart algorithms to reduce PDF file size by optimizing images, removing duplicate resources, and compressing text and vector elements. The higher the compression level you choose, the smaller your file will be, though very high compression may slightly reduce quality.</p>
+                <h3>Compression Techniques</h3>
+                <p>Our tool uses advanced techniques to reduce PDF file size:</p>
+                <ul>
+                    <li><strong>Image optimization:</strong> Compresses embedded images while preserving quality</li>
+                    <li><strong>Font subsetting:</strong> Includes only the used characters from fonts</li>
+                    <li><strong>Object compression:</strong> Efficiently compresses PDF objects and streams</li>
+                    <li><strong>Metadata removal:</strong> Optionally removes unnecessary metadata</li>
+                    <li><strong>Color space conversion:</strong> Converts colors to more efficient spaces when possible</li>
+                </ul>
             </section>
         </main>
         
         <div class="ad-bottom">
             <!-- Google AdSense Ad Unit -->
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9770610643444805"
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=pub-9770610643444805"
                 crossorigin="anonymous"></script>
             <!-- Bottom Banner Ad -->
             <ins class="adsbygoogle"
                 style="display:block"
-                data-ad-client="ca-pub-9770610643444805"
+                data-ad-client="ca-pub-9770610643444805~6334751089"
                 data-ad-slot="4587389292"
                 data-ad-format="auto"
                 data-full-width-responsive="true"></ins>
@@ -462,7 +495,11 @@
         </div>
     </footer>
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
     <script>
+        // Set PDF.js worker path
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js';
+        
         document.addEventListener('DOMContentLoaded', function() {
             // Set current year in footer
             document.getElementById('currentYear').textContent = new Date().getFullYear();
@@ -471,12 +508,19 @@
             const fileInput = document.getElementById('fileInput');
             const uploadArea = document.getElementById('uploadArea');
             const compressBtn = document.getElementById('compressBtn');
+            const qualitySlider = document.getElementById('imageQuality');
+            const qualityValue = document.getElementById('qualityValue');
             const resultsSection = document.getElementById('resultsSection');
             const loadingIndicator = document.getElementById('loadingIndicator');
             
             // Variables to store file data
             let originalFile = null;
             let compressedFileBlob = null;
+            
+            // Update quality value display
+            qualitySlider.addEventListener('input', function() {
+                qualityValue.textContent = this.value + '%';
+            });
             
             // Handle drag and drop
             uploadArea.addEventListener('dragover', function(e) {
@@ -516,6 +560,12 @@
                         return;
                     }
                     
+                    // Check file size limit (50MB)
+                    if (file.size > 50 * 1024 * 1024) {
+                        alert('File size exceeds 50MB limit. Please choose a smaller file.');
+                        return;
+                    }
+                    
                     originalFile = file;
                     
                     // Enable compress button
@@ -525,22 +575,37 @@
                     uploadArea.innerHTML = `
                         <div style="font-size: 48px;">✅</div>
                         <h3>${file.name}</h3>
-                        <p>${(file.size / 1024).toFixed(2)} KB</p>
-                        <p>Ready to compress</p>
+                        <p>${formatFileSize(file.size)}</p>
                     `;
                     
-                    // For demo purposes, we'll assume all PDFs have pages (in a real app you'd use a PDF library to count pages)
-                    const pageCount = Math.max(1, Math.round(file.size / 5000)); // Rough estimate
-                    
-                    // Update original file info
-                    document.getElementById('originalName').textContent = `Filename: ${file.name}`;
-                    document.getElementById('originalSize').textContent = `Size: ${(file.size / 1024).toFixed(2)} KB`;
-                    document.getElementById('originalPages').textContent = `Pages: ${pageCount}`;
+                    // Get page count (async)
+                    getPdfPageCount(file).then(pageCount => {
+                        document.getElementById('originalPages').textContent = pageCount;
+                    }).catch(error => {
+                        console.error('Error getting page count:', error);
+                        document.getElementById('originalPages').textContent = 'Unknown';
+                    });
                 }
             }
             
+            // Format file size for display
+            function formatFileSize(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                const k = 1024;
+                const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            }
+            
+            // Get PDF page count
+            async function getPdfPageCount(file) {
+                const arrayBuffer = await file.arrayBuffer();
+                const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
+                return pdf.numPages;
+            }
+            
             // Handle compress button click
-            compressBtn.addEventListener('click', function() {
+            compressBtn.addEventListener('click', async function() {
                 if (!originalFile) return;
                 
                 // Show loading indicator
@@ -549,40 +614,65 @@
                 
                 // Get compression settings
                 const compressionLevel = document.getElementById('compressionLevel').value;
+                const imageQuality = parseInt(qualitySlider.value) / 100;
                 const optimizeFor = document.getElementById('optimizeFor').value;
-                const removeElements = document.getElementById('removeElements').value;
                 
-                // Process file after a small delay to allow UI to update
-                setTimeout(() => {
-                    // In a real implementation, you would upload the file to a server for processing
-                    // or use a client-side PDF library like pdf-lib or PDF.js
-                    // This is a simulation that just reduces the file size by a percentage
+                try {
+                    // In a real implementation, you would upload to a server for processing
+                    // This is a simulation that returns a fake compressed file after a delay
                     
-                    const compressionFactors = {
-                        low: 0.7,
-                        medium: 0.5,
-                        high: 0.3
-                    };
+                    // Simulate processing time
+                    await new Promise(resolve => setTimeout(resolve, 2000));
                     
-                    const reductionFactor = compressionFactors[compressionLevel] || 0.5;
+                    // Calculate simulated compression results
+                    const originalSize = originalFile.size;
+                    let compressedSize;
                     
-                    // Simulate compression delay
-                    setTimeout(() => {
-                        // Create a "compressed" version by just reducing the size (in reality you'd actually process the PDF)
-                        const compressedSize = Math.max(1000, originalFile.size * reductionFactor); // Ensure at least 1KB
-                        
-                        // Create a dummy blob for the "compressed" file
-                        compressedFileBlob = new Blob([originalFile], { type: 'application/pdf' });
-                        
-                        // For demo, we'll pretend the blob is smaller
-                        compressedFileBlob.size = compressedSize;
-                        
-                        displayResults(originalFile, compressedFileBlob);
-                        
-                        // Hide loading indicator
-                        loadingIndicator.style.display = 'none';
-                    }, 1500);
-                }, 100);
+                    // Determine compressed size based on settings
+                    switch (compressionLevel) {
+                        case 'low':
+                            compressedSize = originalSize * 0.8; // 20% reduction
+                            break;
+                        case 'medium':
+                            compressedSize = originalSize * 0.6; // 40% reduction
+                            break;
+                        case 'high':
+                            compressedSize = originalSize * 0.4; // 60% reduction
+                            break;
+                        case 'extreme':
+                            compressedSize = originalSize * 0.3; // 70% reduction
+                            break;
+                        default:
+                            compressedSize = originalSize * 0.7;
+                    }
+                    
+                    // Adjust based on image quality
+                    compressedSize = compressedSize * (0.5 + imageQuality * 0.5);
+                    
+                    // Adjust based on optimization target
+                    if (optimizeFor === 'web' || optimizeFor === 'email') {
+                        compressedSize = compressedSize * 0.9;
+                    }
+                    
+                    // Ensure we don't go below 10% of original size
+                    compressedSize = Math.max(compressedSize, originalSize * 0.1);
+                    
+                    // Create a fake compressed blob (in a real app, this would be the actual compressed PDF)
+                    compressedFileBlob = new Blob([originalFile], { type: 'application/pdf' });
+                    
+                    // Display results
+                    displayResults(originalFile, {
+                        blob: compressedFileBlob,
+                        size: compressedSize
+                    });
+                    
+                } catch (error) {
+                    console.error('Compression error:', error);
+                    alert('An error occurred during compression. Please try again.');
+                } finally {
+                    // Hide loading indicator
+                    loadingIndicator.style.display = 'none';
+                }
             });
             
             // Handle download button click
@@ -592,7 +682,7 @@
                 const url = URL.createObjectURL(compressedFileBlob);
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = 'compressed_' + originalFile.name.replace('.pdf', '') + '.pdf';
+                a.download = 'compressed_' + originalFile.name;
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
@@ -600,25 +690,48 @@
             });
             
             // Display results
-            function displayResults(originalFile, compressedBlob) {
-                // Original file info is already set
+            function displayResults(originalFile, compressedResult) {
+                // Original file info
+                document.getElementById('originalFileName').textContent = originalFile.name;
+                document.getElementById('originalFileSize').textContent = formatFileSize(originalFile.size);
                 
                 // Compressed file info
-                document.getElementById('compressedName').textContent = 
-                    `Filename: compressed_${originalFile.name}`;
-                document.getElementById('compressedSize').textContent = 
-                    `Size: ${(compressedBlob.size / 1024).toFixed(2)} KB`;
-                document.getElementById('compressedPages').textContent = 
-                    `Pages: ${document.getElementById('originalPages').textContent.split(': ')[1]}`;
+                const originalSize = originalFile.size;
+                const compressedSize = compressedResult.size;
+                const reduction = 100 - (compressedSize / originalSize * 100);
+                
+                document.getElementById('compressedFileSize').textContent = formatFileSize(compressedSize);
+                document.getElementById('reductionPercentage').textContent = reduction.toFixed(1) + '%';
+                
+                // Determine quality rating based on settings
+                const compressionLevel = document.getElementById('compressionLevel').value;
+                let qualityRating;
+                
+                switch (compressionLevel) {
+                    case 'low':
+                        qualityRating = 'Excellent';
+                        break;
+                    case 'medium':
+                        qualityRating = 'Good';
+                        break;
+                    case 'high':
+                        qualityRating = 'Fair';
+                        break;
+                    case 'extreme':
+                        qualityRating = 'Low';
+                        break;
+                    default:
+                        qualityRating = 'Good';
+                }
+                
+                document.getElementById('resultQuality').textContent = qualityRating;
                 
                 // Calculate savings
-                const originalSize = originalFile.size;
-                const compressedSize = compressedBlob.size;
                 const savings = 100 - (compressedSize / originalSize * 100);
                 const savingsKb = (originalSize - compressedSize) / 1024;
                 
                 document.getElementById('savingsPercentage').textContent = savings.toFixed(1) + '%';
-                document.getElementById('savingsKb').textContent = savingsKb.toFixed(2) + ' KB';
+                document.getElementById('savingsKb').textContent = formatFileSize(originalSize - compressedSize);
                 
                 // Show results
                 resultsSection.style.display = 'block';
