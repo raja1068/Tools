@@ -13,9 +13,9 @@
     <meta property="og:url" content="https://raja1068.github.io/Tools/img-collage-maker.html">
     <meta property="og:image" content="https://raja1068.github.io/Tools/img-collage-maker-preview.jpg">
     <link rel="canonical" href="https://raja1068.github.io/Tools/img-collage-maker.html">
-    <title>Free Online Photo Collage Maker | Create Beautiful Collages</title>
+    <title>Photo Collage Maker</title>
     <style>
-        :root {
+         :root {
             --primary-color: #9c27b0;
             --secondary-color: #7b1fa2;
             --accent-color: #e91e63;
@@ -368,7 +368,7 @@
                 width: 80px;
                 height: 80px;
             }
-        }
+        } 
     </style>
 </head>
 <body>
@@ -384,7 +384,7 @@
     <div class="container">
         <div class="ad-top">
             <!-- Google AdSense Ad Unit -->
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=pub-9770610643444805"
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9770610643444805"
                 crossorigin="anonymous"></script>
             <!-- Top Banner Ad -->
             <ins class="adsbygoogle"
@@ -499,7 +499,7 @@
         
         <div class="ad-bottom">
             <!-- Google AdSense Ad Unit -->
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9770610643444805"
                 crossorigin="anonymous"></script>
             <!-- Bottom Banner Ad -->
             <ins class="adsbygoogle"
@@ -525,7 +525,7 @@
             <p>&copy; <span id="currentYear"></span> CollageMakerPro. All rights reserved.</p>
         </div>
     </footer>
-    
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Set current year in footer
@@ -612,7 +612,9 @@
                 }
                 
                 // Activate first layout by default
-                layoutOptions.firstChild.classList.add('active');
+                if (layoutOptions.firstChild) {
+                    layoutOptions.firstChild.classList.add('active');
+                }
             }
             
             // Initialize layout options
@@ -637,9 +639,8 @@
                 e.preventDefault();
                 this.style.backgroundColor = 'rgba(156, 39, 176, 0.05)';
                 
-                if (e.dataTransfer.files.length) {
-                    fileInput.files = e.dataTransfer.files;
-                    handleFileSelection();
+                if (e.dataTransfer.files && e.dataTransfer.files.length) {
+                    handleFiles(e.dataTransfer.files);
                 }
             });
             
@@ -649,72 +650,83 @@
             });
             
             // Handle file selection
-            fileInput.addEventListener('change', handleFileSelection);
-            
-            function handleFileSelection() {
-                if (fileInput.files && fileInput.files.length > 0) {
-                    uploadedImages = [];
-                    selectedImages.innerHTML = '';
-                    
-                    // Process each file
-                    Array.from(fileInput.files).forEach((file, index) => {
-                        // Check if file is an image
-                        if (!file.type.match('image.*')) {
-                            return;
-                        }
-                        
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            const img = new Image();
-                            img.onload = function() {
-                                uploadedImages.push({
-                                    file: file,
-                                    element: img,
-                                    src: e.target.result
-                                });
-                                
-                                // Add to selected images display
-                                const imgContainer = document.createElement('div');
-                                imgContainer.style.position = 'relative';
-                                
-                                const imgElement = document.createElement('img');
-                                imgElement.src = e.target.result;
-                                imgElement.className = 'selected-image';
-                                
-                                const removeBtn = document.createElement('div');
-                                removeBtn.className = 'remove-image';
-                                removeBtn.innerHTML = '×';
-                                removeBtn.addEventListener('click', function() {
-                                    imgContainer.remove();
-                                    uploadedImages = uploadedImages.filter(img => img.src !== e.target.result);
-                                    if (uploadedImages.length === 0) {
-                                        selectedImagesContainer.style.display = 'none';
-                                        createBtn.disabled = true;
-                                    }
-                                });
-                                
-                                imgContainer.appendChild(imgElement);
-                                imgContainer.appendChild(removeBtn);
-                                selectedImages.appendChild(imgContainer);
-                                
-                                // Show selected images container
-                                selectedImagesContainer.style.display = 'block';
-                                
-                                // Enable create button if we have at least one image
-                                if (uploadedImages.length > 0) {
-                                    createBtn.disabled = false;
-                                }
-                            };
-                            img.src = e.target.result;
-                        };
-                        reader.readAsDataURL(file);
-                    });
+            fileInput.addEventListener('change', function() {
+                if (this.files && this.files.length) {
+                    handleFiles(this.files);
                 }
+            });
+            
+            // Process selected files
+            function handleFiles(files) {
+                // Reset previous selections
+                uploadedImages = [];
+                selectedImages.innerHTML = '';
+                
+                // Process each file
+                Array.from(files).forEach((file, index) => {
+                    // Check if file is an image
+                    if (!file.type.match('image.*')) {
+                        return;
+                    }
+                    
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const img = new Image();
+                        img.onload = function() {
+                            uploadedImages.push({
+                                file: file,
+                                element: img,
+                                src: e.target.result,
+                                id: 'img-' + Date.now() + '-' + index
+                            });
+                            
+                            // Add to selected images display
+                            const imgContainer = document.createElement('div');
+                            imgContainer.style.position = 'relative';
+                            imgContainer.dataset.imgId = uploadedImages[uploadedImages.length - 1].id;
+                            
+                            const imgElement = document.createElement('img');
+                            imgElement.src = e.target.result;
+                            imgElement.className = 'selected-image';
+                            
+                            const removeBtn = document.createElement('div');
+                            removeBtn.className = 'remove-image';
+                            removeBtn.innerHTML = '×';
+                            removeBtn.addEventListener('click', function(e) {
+                                e.stopPropagation();
+                                const imgId = this.parentElement.dataset.imgId;
+                                imgContainer.remove();
+                                uploadedImages = uploadedImages.filter(img => img.id !== imgId);
+                                if (uploadedImages.length === 0) {
+                                    selectedImagesContainer.style.display = 'none';
+                                    createBtn.disabled = true;
+                                }
+                            });
+                            
+                            imgContainer.appendChild(imgElement);
+                            imgContainer.appendChild(removeBtn);
+                            selectedImages.appendChild(imgContainer);
+                            
+                            // Show selected images container
+                            selectedImagesContainer.style.display = 'block';
+                            
+                            // Enable create button if we have at least one image
+                            if (uploadedImages.length > 0) {
+                                createBtn.disabled = false;
+                            }
+                        };
+                        img.src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                });
             }
             
             // Handle create button click
             createBtn.addEventListener('click', function() {
-                if (uploadedImages.length === 0) return;
+                if (uploadedImages.length === 0) {
+                    alert('Please select at least one image to create a collage');
+                    return;
+                }
                 
                 // Show loading indicator
                 loadingIndicator.style.display = 'block';
@@ -737,11 +749,15 @@
                 const mimeType = `image/${format}`;
                 const fileName = `collage_${new Date().getTime()}.${format}`;
                 
+                // For transparent background, force PNG format
+                const bgColor = document.getElementById('background').value;
+                const finalFormat = bgColor === 'transparent' && format !== 'png' ? 'png' : format;
+                
                 collageCanvas.toBlob(function(blob) {
                     const url = URL.createObjectURL(blob);
                     const a = document.createElement('a');
                     a.href = url;
-                    a.download = fileName;
+                    a.download = fileName.replace(`.${format}`, `.${finalFormat}`);
                     document.body.appendChild(a);
                     a.click();
                     document.body.removeChild(a);
@@ -767,6 +783,11 @@
                 const cellCount = cellMap.flat().filter(cell => cell === 1).length;
                 const imagesToUse = uploadedImages.slice(0, cellCount);
                 
+                if (imagesToUse.length === 0) {
+                    alert('No images available to create collage');
+                    return;
+                }
+                
                 // Calculate collage dimensions (use first image's aspect ratio as base)
                 const baseAspect = imagesToUse[0].element.width / imagesToUse[0].element.height;
                 const collageWidth = 1000;
@@ -777,8 +798,12 @@
                 collageCanvas.height = collageHeight;
                 
                 // Fill background
-                collageCtx.fillStyle = bgColor;
-                collageCtx.fillRect(0, 0, collageWidth, collageHeight);
+                if (bgColor === 'transparent') {
+                    collageCtx.clearRect(0, 0, collageWidth, collageHeight);
+                } else {
+                    collageCtx.fillStyle = bgColor;
+                    collageCtx.fillRect(0, 0, collageWidth, collageHeight);
+                }
                 
                 // Calculate cell dimensions
                 const cellWidth = (collageWidth - (spacing * (cellMap[0].length + 1))) / cellMap[0].length;
@@ -816,9 +841,10 @@
                 }
                 
                 // Update preview
-                const previewCtx = collagePreview.getContext('2d');
-                collagePreview.width = collageCanvas.width;
-                collagePreview.height = collageCanvas.height;
+                const previewCanvas = document.getElementById('collagePreview');
+                const previewCtx = previewCanvas.getContext('2d');
+                previewCanvas.width = collageCanvas.width;
+                previewCanvas.height = collageCanvas.height;
                 previewCtx.drawImage(collageCanvas, 0, 0);
                 
                 // Show results
