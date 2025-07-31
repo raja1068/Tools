@@ -23,6 +23,8 @@
             --border-radius: 12px;
             --box-shadow: 0 10px 20px rgba(0,0,0,0.1);
             --transition: all 0.3s ease;
+            --orange-bg: #ff7b25;
+            --orange-light: #ff9a56;
         }
 
         * {
@@ -228,9 +230,10 @@
             transform: translateY(-3px);
         }
 
-        /* Tools Section */
-        .tools-section {
+        /* Tools Grid Section */
+        .all-tools-section {
             padding: 80px 0;
+            background: linear-gradient(135deg, var(--orange-bg) 0%, var(--orange-light) 100%);
         }
 
         .section-header {
@@ -241,44 +244,19 @@
         .section-header h2 {
             font-size: 2.5rem;
             margin-bottom: 15px;
-            color: var(--dark);
+            color: white;
         }
 
         .section-header p {
-            color: var(--gray);
+            color: rgba(255,255,255,0.9);
             max-width: 700px;
             margin: 0 auto;
         }
 
-        .tool-categories {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-        .category-btn {
-            padding: 10px 20px;
-            border-radius: 50px;
-            background: white;
-            border: 1px solid var(--light-gray);
-            color: var(--dark);
-            font-weight: 500;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .category-btn:hover, .category-btn.active {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-
         .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
         }
 
         .tool-card {
@@ -287,11 +265,14 @@
             overflow: hidden;
             box-shadow: var(--box-shadow);
             transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
         .tool-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
         }
 
         .tool-icon {
@@ -305,22 +286,28 @@
         }
 
         .tool-info {
-            padding: 25px;
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .tool-info h3 {
             margin-bottom: 10px;
             font-size: 1.3rem;
+            color: var(--dark);
         }
 
         .tool-info p {
             color: var(--gray);
             margin-bottom: 20px;
             font-size: 0.95rem;
+            flex: 1;
         }
 
         .tool-link {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
             color: var(--primary);
             font-weight: 600;
             text-decoration: none;
@@ -357,6 +344,7 @@
             padding: 30px;
             border-radius: var(--border-radius);
             transition: var(--transition);
+            background: #f9f9f9;
         }
 
         .feature-card:hover {
@@ -433,6 +421,7 @@
             margin-bottom: 20px;
             position: relative;
             padding-bottom: 10px;
+            color: white;
         }
 
         .footer-col h3::after {
@@ -567,7 +556,7 @@
                 padding: 50px 0;
             }
 
-            .tools-section, .features-section {
+            .all-tools-section, .features-section {
                 padding: 60px 0;
             }
 
@@ -575,8 +564,8 @@
                 font-size: 1.8rem;
             }
 
-            .tool-categories {
-                flex-wrap: wrap;
+            .tools-grid {
+                grid-template-columns: 1fr;
             }
 
             .feature-card {
@@ -601,8 +590,7 @@
             <nav>
                 <ul id="navMenu">
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="#image-tools">Image Tools</a></li>
-                    <li><a href="#pdf-tools">PDF Tools</a></li>
+                    <li><a href="#all-tools">All Tools</a></li>
                     <li><a href="#features">Features</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
@@ -622,257 +610,190 @@
             </div>
             
             <div class="cta-buttons">
-                <a href="#image-tools" class="btn btn-primary">Explore Image Tools</a>
-                <a href="#pdf-tools" class="btn btn-secondary">Explore PDF Tools</a>
+                <a href="#all-tools" class="btn btn-primary">Explore All Tools</a>
+                <a href="#features" class="btn btn-secondary">See Features</a>
             </div>
         </div>
     </section>
 
-    <!-- Tools Section -->
-    <section class="tools-section" id="image-tools">
+    <!-- All Tools Grid Section -->
+    <section class="all-tools-section" id="all-tools">
         <div class="container">
             <div class="section-header">
-                <h2>Popular Image Tools</h2>
-                <p>Enhance, compress, convert and edit your images with our free online tools</p>
-            </div>
-            
-            <div class="tool-categories">
-                <button class="category-btn active">All Tools</button>
-                <button class="category-btn">Compression</button>
-                <button class="category-btn">Conversion</button>
-                <button class="category-btn">Editing</button>
-                <button class="category-btn">Other</button>
+                <h2>All Our Powerful Tools</h2>
+                <p>Everything you need to work with images and PDFs in one place</p>
             </div>
             
             <div class="tools-grid">
-                <!-- Image Tool 1 -->
+                <!-- Image Compressor -->
                 <div class="tool-card">
                     <div class="tool-icon">
                         <i class="fas fa-compress-alt"></i>
                     </div>
                     <div class="tool-info">
-                   <h3><a href="https://raja1068.github.io/Tools/img-compressor.html" class="tool-link">Image Compressor</a></h3>
-                   <p>Reduce image file size without losing quality. Supports JPG, PNG, and WebP formats.</p>
-                    <a href="/Tools/img-compressor.html" class="tool-link">Use Tool <i class="fas fa-arrow-right"></i></a>
-
+                        <h3>Image Compressor</h3>
+                        <p>Reduce image file size without losing quality. Supports JPG, PNG, and WebP formats.</p>
+                        <a href="https://raja1068.github.io/Tools/img-compressor.html" class="tool-link">Use Tool <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
                 
-                <!-- Image Tool 2 -->
+                <!-- Image Converter -->
                 <div class="tool-card">
                     <div class="tool-icon">
                         <i class="fas fa-exchange-alt"></i>
                     </div>
                     <div class="tool-info">
-                    <h3><a href="https://raja1068.github.io/Tools/img-converter.html" style="text-decoration: none; color: inherit;">Image Converter</a></h3>
-                    <p>Convert between PNG, GIF, WebP and other image formats into jpg in seconds.</p>
-                    <a href="/Tools/img-converter.html" class="tool-link">Use Tool <i class="fas fa-arrow-right"></i></a>
+                        <h3>Image Converter</h3>
+                        <p>Convert between PNG, GIF, WebP and other image formats into jpg in seconds.</p>
+                        <a href="https://raja1068.github.io/Tools/img-converter.html" class="tool-link">Use Tool <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
                 
-                <!-- Image Tool 3 -->
+                <!-- Image Resizer -->
                 <div class="tool-card">
                     <div class="tool-icon">
                         <i class="fas fa-crop-alt"></i>
                     </div>
                     <div class="tool-info">
-                        <div>
-                        <h3><a href="https://raja1068.github.io/Tools/img-resizer.html">Image Resizer</a></h3>
-                         <p>Resize your images to any dimension while maintaining aspect ratio.</p>
-                         <a href="/Tools/img-resizer.html" class="tool-link">Use Tool <i class="fas fa-arrow-right"></i></a>
-                       </div>
+                        <h3>Image Resizer</h3>
+                        <p>Resize your images to any dimension while maintaining aspect ratio.</p>
+                        <a href="https://raja1068.github.io/Tools/img-resizer.html" class="tool-link">Use Tool <i class="fas fa-arrow-right"></i></a>
+                    </div>
                 </div>
                 
-                <!-- Image Tool 4 -->
+                <!-- Image Enhancer -->
                 <div class="tool-card">
                     <div class="tool-icon">
                         <i class="fas fa-magic"></i>
                     </div>
                     <div class="tool-info">
-                        <a href="https://raja1068.github.io/Tools/img-enhancer.html" class="tool-card-link">
-                      <div>
-                      <h3>Image Enhancer</h3>
-                      <p>Improve image quality, adjust brightness, contrast and colors automatically.</p>
-                      <span class="tool-link">Use Tool <i class="fas fa-arrow-right"></i></span>
-                 </div>
-                </a>
+                        <h3>Image Enhancer</h3>
+                        <p>Improve image quality, adjust brightness, contrast and colors automatically.</p>
+                        <a href="https://raja1068.github.io/Tools/img-enhancer.html" class="tool-link">Use Tool <i class="fas fa-arrow-right"></i></a>
+                    </div>
                 </div>
                 
-               
-                <!-- Image Tool 5 -->
+                <!-- Image Collage Maker -->
                 <div class="tool-card">
                     <div class="tool-icon">
                         <i class="fas fa-images"></i>
                     </div>
                     <div class="tool-info">
-                        <a href="https://raja1068.github.io/Tools/img-collage-maker.html" class="tool-card">
-                    <div>
-                     <h3>Image Collage Maker</h3>
-                     <p>Create beautiful photo collages with multiple layout options.</p>
-                     <span class="tool-link">Use Tool <i class="fas fa-arrow-right"></i></span>
-                 </div>
-                </a>
-
-                 <!-- Image Tool 6 -->
-                <!-- Word to PDF Converter -->
-                 <div class="tool-card">
-                <div class="tool-icon">
-                <i class="fas fa-file-pdf"></i>
-                </div>
-                <div class="tool-info">
-                <a href="https://raja1068.github.io/Tools/word-to-pdf.html" class="tool-card" aria-label="Word to PDF Converter">
-                <div class="tool-content">
-                <h3>Word to PDF</h3>
-                <p>Convert Word documents (DOC/DOCX) to PDF files with high quality output.</p>
-                <span class="tool-link">Use Tool <i class="fas fa-arrow-right"></i></span>
-             </div>
-              </a>
-             </div>
-            </div>
-          </div>
-
-                    <!-- Image Tool 7 -->
-               <!-- Excel to PDF Converter -->
-                <div class="tool-card">
-                <div class="tool-icon">
-               <i class="fas fa-file-excel"></i>
-               </div>
-               <div class="tool-info">
-               <a href="https://raja1068.github.io/Tools/excel-to-pdf.html" class="tool-card-link" aria-label="Excel to PDF Converter">
-               <div class="tool-content">
-               <h3>Excel to PDF</h3>
-               <p>Convert Excel spreadsheets (XLS/XLSX) to PDF files while preserving formatting and tables.</p>
-               <span class="tool-link">Convert Now <i class="fas fa-arrow-right"></i></span>
-              </div>
-             </a>
-            </div>
-           </div>
-
-        <!-- Image Tool 8 -->
-           <!-- Image to PDF Converter -->
-           <a href="https://raja1068.github.io/Tools/img-to-pdf.html" class="tool-card" aria-label="Image to PDF Converter">
-           <div class="tool-icon">
-         <i class="fas fa-file-pdf"></i>
-         </div>
-         <div class="tool-info">
-          <div class="tool-content">
-         <h3>Image to PDF</h3>
-         <p>Free online tool to convert any image file to PDF. Supports JPG, PNG, GIF, BMP and more. Add borders, adjust margins and customize your PDF output.</p>
-         <span class="tool-link">Use Tool <i class="fas fa-arrow-right"></i></span>
-       </div>
-     </div>
-    </a>
-    </section>
-
-    <!-- PDF Tools Section -->
-    <section class="tools-section" id="pdf-tools" style="background: white;">
-        <div class="container">
-            <div class="section-header">
-                <h2>Popular PDF Tools</h2>
-                <p>Edit, convert, compress and manipulate PDF files with our free online tools</p>
-            </div>
-            
-            <div class="tools-grid">
-                <!-- PDF Tool 1 -->
-                <div class="tool-card">
-                    <div class="tool-icon">
-                        <i class="fas fa-file-pdf"></i>
+                        <h3>Image Collage Maker</h3>
+                        <p>Create beautiful photo collages with multiple layout options.</p>
+                        <a href="https://raja1068.github.io/Tools/img-collage-maker.html" class="tool-link">Use Tool <i class="fas fa-arrow-right"></i></a>
                     </div>
-                    <div class="tool-info">
-                       <a href="https://raja1068.github.io/Tools/pdf-compressor.html" class="tool-card">
-                    <div>
-                     <h3>PDF Compressor</h3>
-                    <p>Reduce PDF file size while maintaining quality. Perfect for email attachments.</p>
-                    <span class="tool-link">Use Tool <i class="fas fa-arrow-right"></i></span>
-                   </div>
-                  </a> 
                 </div>
                 
-                <!-- PDF Tool 2 -->
+                <!-- Word to PDF -->
                 <div class="tool-card">
                     <div class="tool-icon">
                         <i class="fas fa-file-word"></i>
                     </div>
                     <div class="tool-info">
-                        <a href="https://raja1068.github.io/Tools/pdf-to-word.html" class="tool-card" aria-label="PDF to Word Converter">
-                     <div class="tool-content">
-                    <h3>PDF to Word</h3>
-                    <p>Convert PDF files to editable Word documents while preserving formatting.</p>
-                    <span class="tool-link">Use Tool <i class="fas fa-arrow-right"></i></span>
-                 </div>
-                </a>
+                        <h3>Word to PDF</h3>
+                        <p>Convert Word documents (DOC/DOCX) to PDF files with high quality output.</p>
+                        <a href="https://raja1068.github.io/Tools/word-to-pdf.html" class="tool-link">Use Tool <i class="fas fa-arrow-right"></i></a>
+                    </div>
                 </div>
                 
-                <!-- PDF Tool 3 -->
+                <!-- Excel to PDF -->
                 <div class="tool-card">
                     <div class="tool-icon">
                         <i class="fas fa-file-excel"></i>
                     </div>
                     <div class="tool-info">
-                        <a href="https://raja1068.github.io/Tools/pdf-to-excel.html" class="tool-card">
-                      <div class="tool-content">
-                       <h3>PDF to Excel</h3>
-                      <p>Extract tables from PDF files and convert them to editable Excel spreadsheets.</p>
-                   <div class="tool-link">Use Tool <i class="fas fa-arrow-right"></i></div>
-                 </div>
-              </a>
+                        <h3>Excel to PDF</h3>
+                        <p>Convert Excel spreadsheets (XLS/XLSX) to PDF files while preserving formatting.</p>
+                        <a href="https://raja1068.github.io/Tools/excel-to-pdf.html" class="tool-link">Use Tool <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
                 
-                <!-- PDF Tool 4 -->
+                <!-- Image to PDF -->
                 <div class="tool-card">
                     <div class="tool-icon">
                         <i class="fas fa-file-image"></i>
                     </div>
                     <div class="tool-info">
-                        <a href="https://raja1068.github.io/Tools/pdf-to-jpg.html" class="tool-card group" aria-label="Convert PDF to JPG">
-                      <div class="tool-content">
-                      <h3 class="group-hover:text-blue-600 transition-colors">PDF to JPG</h3>
-                      <p>Convert PDF pages to high-quality JPG images with customizable DPI.</p>
-                     <div class="tool-link">
-                     Use Tool
-                     <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
-                     </div>
-                   </div>
-                  </a>
+                        <h3>Image to PDF</h3>
+                        <p>Convert any image file to PDF. Supports JPG, PNG, GIF, BMP and more.</p>
+                        <a href="https://raja1068.github.io/Tools/img-to-pdf.html" class="tool-link">Use Tool <i class="fas fa-arrow-right"></i></a>
+                    </div>
                 </div>
                 
-                <!-- PDF Tool 5 -->
+                <!-- PDF Compressor -->
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <div class="tool-info">
+                        <h3>PDF Compressor</h3>
+                        <p>Reduce PDF file size while maintaining quality. Perfect for email attachments.</p>
+                        <a href="https://raja1068.github.io/Tools/pdf-compressor.html" class="tool-link">Use Tool <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- PDF to Word -->
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-file-word"></i>
+                    </div>
+                    <div class="tool-info">
+                        <h3>PDF to Word</h3>
+                        <p>Convert PDF files to editable Word documents while preserving formatting.</p>
+                        <a href="https://raja1068.github.io/Tools/pdf-to-word.html" class="tool-link">Use Tool <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- PDF to Excel -->
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-file-excel"></i>
+                    </div>
+                    <div class="tool-info">
+                        <h3>PDF to Excel</h3>
+                        <p>Extract tables from PDF files and convert them to editable Excel spreadsheets.</p>
+                        <a href="https://raja1068.github.io/Tools/pdf-to-excel.html" class="tool-link">Use Tool <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- PDF to JPG -->
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-file-image"></i>
+                    </div>
+                    <div class="tool-info">
+                        <h3>PDF to JPG</h3>
+                        <p>Convert PDF pages to high-quality JPG images with customizable DPI.</p>
+                        <a href="https://raja1068.github.io/Tools/pdf-to-jpg.html" class="tool-link">Use Tool <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- PDF Protector -->
                 <div class="tool-card">
                     <div class="tool-icon">
                         <i class="fas fa-lock"></i>
                     </div>
                     <div class="tool-info">
-                        <a href="https://raja1068.github.io/Tools/pdf-protector.html" class="security-tool-card" aria-label="PDF Protection Tool">
-                      <div class="tool-content">
-                       <div class="tool-header">
-                       <h3>PDF Protector</h3>
-                        <i class="fas fa-lock"></i>
-                      </div>
-                       <p>Add passwords and permissions to your PDF files to protect sensitive content.</p>
-                       <div class="security-tool-link">
-                       Secure Your Files
-                       <i class="fas fa-shield-alt ml-2"></i>
-                      </div>
+                        <h3>PDF Protector</h3>
+                        <p>Add passwords and permissions to your PDF files to protect sensitive content.</p>
+                        <a href="https://raja1068.github.io/Tools/pdf-protector.html" class="tool-link">Use Tool <i class="fas fa-arrow-right"></i></a>
                     </div>
-                   </a>
                 </div>
                 
-                <!-- PDF Tool 6 -->
-              <div class="tool-card">
-    <div class="tool-icon">
-        <i class="fas fa-file-merge"></i>
-    </div>
-    <div class="tool-info">
-        <div class="tool-content">
-            <a href="https://raja1068.github.io/Tools/pdf-merger.html" class="merge-tool-card" aria-label="PDF Merger Tool">
-                <div class="tool-header">
-                    <h3>PDF Merger</h3>
-                    <i class="fas fa-object-group"></i>
+                <!-- PDF Merger -->
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-file-merge"></i>
+                    </div>
+                    <div class="tool-info">
+                        <h3>PDF Merger</h3>
+                        <p>Combine multiple PDF files into a single document in your preferred order.</p>
+                        <a href="https://raja1068.github.io/Tools/pdf-merger.html" class="tool-link">Use Tool <i class="fas fa-arrow-right"></i></a>
+                    </div>
                 </div>
-                <p>Combine multiple PDF files into a single document in your preferred order.</p>
-                <div class="merge-tool-link">
-                    Merge Documents
-                    <i class="fas fa-arrow-right ml-2"></i>
-                </div>
-            </a>
+            </div>
         </div>
-    </div>
-</div> 
     </section>
 
     <!-- Features Section -->
@@ -940,7 +861,7 @@
         <div class="container">
             <h2>Ready to Boost Your Productivity?</h2>
             <p>Join thousands of happy users who save time with our free online tools every day.</p>
-            <a href="#image-tools" class="btn cta-btn">Start Using Tools Now</a>
+            <a href="#all-tools" class="btn cta-btn">Start Using Tools Now</a>
         </div>
     </section>
 
@@ -962,26 +883,34 @@
                 <div class="footer-col">
                     <h3>Image Tools</h3>
                     <ul>
-                        <li><a href="https://raja1068.io/Tools/img-compressor.html">Image Compressor</a></li>
-                        <li><a href="https://raja1068.io/Tools/img-converter.html">Image Converter</a></li>
-                        <li><a href="https://raja1068.io/Tools/img-resizer.html">Image Resizer</a></li>
-                        <li><a href="https://raja1068.io/Tools/img-enhancer.html">Image Enhancer</a></li>
-                        <li><a href="https://raja1068.io/Tools/img-collage-maker.html">Image Collage Maker</a></li>
-                        <li><a href="https://raja1068.io/Tools/word-to-pdf.html">Word to pdf</a></li>
-                        <li><a href="https://raja1068.io/Tools/excel-to-pdf.html">Excel to Pdf</a></li>
-                        <li><a href="https://raja1068.io/Tools/img-to-pdf.html">Image to pdf Converter</a></li>
+                        <li><a href="https://raja1068.github.io/Tools/img-compressor.html">Image Compressor</a></li>
+                        <li><a href="https://raja1068.github.io/Tools/img-converter.html">Image Converter</a></li>
+                        <li><a href="https://raja1068.github.io/Tools/img-resizer.html">Image Resizer</a></li>
+                        <li><a href="https://raja1068.github.io/Tools/img-enhancer.html">Image Enhancer</a></li>
+                        <li><a href="https://raja1068.github.io/Tools/img-collage-maker.html">Image Collage Maker</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-col">
                     <h3>PDF Tools</h3>
                     <ul>
-                        <li><a href="https://raja1068.io/Tools/pdf-compressor.html">PDF Compressor</a></li>
-                        <li><a href="https://raja1068.io/Tools/pdf-to-word.html">PDF to Word</a></li>
-                        <li><a href="https://raja1068.io/Tools/pdf-to-excel.html">PDF to Excel</a></li>
-                        <li><a href="https://raja1068.io/Tools/pdf-to-jpg.html">PDF to JPG</a></li>
-                        <li><a href="https://raja1068.io/Tools/pdf-to-jpg.html">PDF to JPG</a></li>
-                        <li><a href="https://raja1068.io/Tools/pdf-merger.html">PDF Merger</a></li>
+                        <li><a href="https://raja1068.github.io/Tools/pdf-compressor.html">PDF Compressor</a></li>
+                        <li><a href="https://raja1068.github.io/Tools/pdf-to-word.html">PDF to Word</a></li>
+                        <li><a href="https://raja1068.github.io/Tools/pdf-to-excel.html">PDF to Excel</a></li>
+                        <li><a href="https://raja1068.github.io/Tools/pdf-to-jpg.html">PDF to JPG</a></li>
+                        <li><a href="https://raja1068.github.io/Tools/pdf-protector.html">PDF Protector</a></li>
+                        <li><a href="https://raja1068.github.io/Tools/pdf-merger.html">PDF Merger</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Converters</h3>
+                    <ul>
+                        <li><a href="https://raja1068.github.io/Tools/word-to-pdf.html">Word to PDF</a></li>
+                        <li><a href="https://raja1068.github.io/Tools/excel-to-pdf.html">Excel to PDF</a></li>
+                        <li><a href="https://raja1068.github.io/Tools/img-to-pdf.html">Image to PDF</a></li>
+                        <li><a href="#">JPG to PNG</a></li>
+                        <li><a href="#">PNG to JPG</a></li>
                     </ul>
                 </div>
                 
@@ -1012,16 +941,6 @@
         // Set current year in footer
         document.getElementById('year').textContent = new Date().getFullYear();
         
-        // Tool category filtering (simplified for demo)
-        const categoryBtns = document.querySelectorAll('.category-btn');
-        categoryBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                categoryBtns.forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                // In a real implementation, you would filter tools here
-            });
-        });
-        
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
@@ -1035,6 +954,24 @@
                     
                     // Close mobile menu if open
                     document.getElementById('navMenu').classList.remove('show');
+                }
+            });
+        });
+        
+        // Simple search functionality
+        const searchInput = document.querySelector('.search-bar input');
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const toolCards = document.querySelectorAll('.tool-card');
+            
+            toolCards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const description = card.querySelector('p').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
                 }
             });
         });
