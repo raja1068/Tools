@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+        <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Free online tool to convert Word documents (DOC/DOCX) to PDF files with high quality output. Fast, secure, and easy to use.">
     <meta name="keywords" content="word to pdf, doc to pdf, docx to pdf, convert word to pdf, online pdf converter, microsoft word converter">
@@ -269,13 +269,17 @@
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Add docx.js library for Word document processing -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/docx.js/7.8.2/docx.js"></script>
+    <!-- Add mammoth.js library for Word document processing -->
+    <script src="https://unpkg.com/mammoth@1.4.0/mammoth.browser.min.js"></script>
     <!-- Add pdf-lib for PDF generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <!-- Add fontkit for custom fonts in PDF -->
+    <script src="https://unpkg.com/@pdf-lib/fontkit@1.1.1/dist/fontkit.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
-    <header>
+        <header>
         <div class="container header-content">
             <a href="/" class="logo">PDFConverterPro</a>
             <nav>
@@ -429,7 +433,9 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Set current year in footer
+            // Initialize jsPDF
+            const { jsPDF } = window.jspdf;
+                        // Set current year in footer
             document.getElementById('currentYear').textContent = new Date().getFullYear();
             
             // DOM elements
@@ -542,40 +548,128 @@
                 });
             }
             
-            // Convert Word to PDF
+            // Convert Word to PDF - Updated function
             async function convertWordToPdf(arrayBuffer, fileName) {
-                // First, we'll extract text from the Word document
-                const { extractRawText } = await import('https://cdn.jsdelivr.net/npm/docx@7.8.2/build/index.js');
+                try {
+                    // First convert Word to HTML with styles using mammoth.js
+                    const result = await mammoth.convertToHtml({ arrayBuffer: arrayBuffer });
+                    const html = result.value;
+                    
+                    // Create a new PDF document
+                    const doc = new jsPDF();
+                    
+                    // Create a temporary div to parse the HTML
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = html;
+                    
+                    // Process paragraphs
+                    const paragraphs = tempDiv.querySelectorAll('p, h1, h2, h3, h4, h5, h6');
+                    
+                    let y = 20; // Start position
+                    const pageHeight = doc.internal.pageSize.height - 20;
+                    const margin = 15;
+                    
+                    // Set default font
+                    doc.setFont('helvetica');
+                    doc.setFontSize(12);
+                    
+                    paragraphs.forEach((p) => {
+                        // Handle headings
+                        if (p.tagName.toLowerCase().startsWith('h')) {
+                            const level = parseInt(p.tagName.substring(1));
+                            const fontSize = 16 - (level * 2);
+                            doc.setFontSize(Math.max(fontSize, 10));
+                            doc.setFont('helvetica', 'bold');
+                        } else {
+                            doc.setFontSize(12);
+                            doc.setFont('helvetica', 'normal');
+                        }
+                        
+                        // Split text into lines that fit the page width
+                        const text = p.textContent;
+                        const lines = doc.splitTextToSize(text, doc.internal.pageSize.width - (margin * 2));
+                        
+                        // Add each line to the PDF
+                        lines.forEach((line) => {
+                            if (y > pageHeight) {
+                                doc.addPage();
+                                y = 20;
+                            }
+                            
+                            doc.text(line, margin, y);
+                            y += 7; // Line height
+                        });
+                        
+                        y += 5; // Paragraph spacing
+                    });
+                    
+                    // Process tables if present
+                    const tables = tempDiv.querySelectorAll('table');
+                    tables.forEach((table) => {
+                        if (y > pageHeight - 50) {
+                            doc.addPage();
+                            y = 20;
+                        }
+                        
+                        const data = [];
+                        const rows = table.querySelectorAll('tr');
+                        
+                        rows.forEach((row) => {
+                            const rowData = [];
+                            const cells = row.querySelectorAll('td, th');
+                            
+                            cells.forEach((cell) => {
+                                rowData.push(cell.textContent);
+                            });
+                            
+                            data.push(rowData);
+                        });
+                        
+                        doc.autoTable({
+                            startY: y,
+                            head: data.slice(0, 1),
+                            body: data.slice(1),
+                            margin: { left: margin },
+                            styles: { fontSize: 10 }
+                        });
+                        
+                        y = doc.lastAutoTable.finalY + 10;
+                    });
+                    
+                    // Generate PDF blob
+                    const pdfBlob = doc.output('blob');
+                    return pdfBlob;
+                } catch (error) {
+                    console.error('Error in conversion:', error);
+                    throw error;
+                }
+            }
+            
+            // Helper function to split text into lines that fit within maxWidth
+            function splitTextIntoLines(text, maxWidth, font, fontSize) {
+                const words = text.split(/\s+/);
+                const lines = [];
+                let currentLine = '';
                 
-                // Extract text from the Word document
-                const text = await extractRawText(arrayBuffer);
+                for (const word of words) {
+                    const testLine = currentLine ? `${currentLine} ${word}` : word;
+                    const testWidth = font.widthOfTextAtSize(testLine, fontSize);
+                    
+                    if (testWidth <= maxWidth) {
+                        currentLine = testLine;
+                    } else {
+                        if (currentLine) {
+                            lines.push(currentLine);
+                        }
+                        currentLine = word;
+                    }
+                }
                 
-                // Now create a PDF with the extracted text
-                const { PDFDocument, rgb } = PDFLib;
+                if (currentLine) {
+                    lines.push(currentLine);
+                }
                 
-                // Create a new PDF document
-                const pdfDoc = await PDFDocument.create();
-                const page = pdfDoc.addPage([612, 792]); // Standard letter size
-                
-                // Draw the text on the PDF
-                const { width, height } = page.getSize();
-                const fontSize = 12;
-                const margin = 50;
-                
-                page.drawText(text, {
-                    x: margin,
-                    y: height - margin - fontSize,
-                    size: fontSize,
-                    color: rgb(0, 0, 0),
-                    maxWidth: width - margin * 2,
-                    lineHeight: fontSize * 1.2,
-                });
-                
-                // Save the PDF
-                const pdfBytes = await pdfDoc.save();
-                
-                // Create a blob from the PDF bytes
-                return new Blob([pdfBytes], { type: 'application/pdf' });
+                return lines;
             }
             
             // Handle download button click
