@@ -269,14 +269,12 @@
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Add mammoth.js library for Word document processing -->
     <script src="https://unpkg.com/mammoth@1.4.0/mammoth.browser.min.js"></script>
-    <!-- Add pdf-lib for PDF generation -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
-    <!-- Add fontkit for custom fonts in PDF -->
-    <script src="https://unpkg.com/@pdf-lib/fontkit@1.1.1/dist/fontkit.umd.min.js"></script>
+    <!-- Using jsPDF for better PDF generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <!-- Add html2canvas for better HTML to PDF conversion -->
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 </head>
 <body>
         <header>
@@ -435,7 +433,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize jsPDF
             const { jsPDF } = window.jspdf;
-                        // Set current year in footer
+            // Set current year in footer
             document.getElementById('currentYear').textContent = new Date().getFullYear();
             
             // DOM elements
@@ -551,96 +549,75 @@
             // Convert Word to PDF - Updated function
             async function convertWordToPdf(arrayBuffer, fileName) {
                 try {
-                    // First convert Word to HTML with styles using mammoth.js
+                    // Convert Word to HTML with styles using mammoth.js
                     const result = await mammoth.convertToHtml({ arrayBuffer: arrayBuffer });
                     const html = result.value;
                     
-                    // Create a new PDF document
-                    const doc = new jsPDF();
-                    
-                    // Create a temporary div to parse the HTML
+                    // Create a temporary div to hold our content
                     const tempDiv = document.createElement('div');
+                    tempDiv.style.position = 'absolute';
+                    tempDiv.style.left = '-9999px';
+                    tempDiv.style.width = '800px';
+                    tempDiv.style.padding = '20px';
+                    tempDiv.style.fontFamily = 'Arial, sans-serif';
                     tempDiv.innerHTML = html;
+                    document.body.appendChild(tempDiv);
                     
-                    // Process paragraphs
-                    const paragraphs = tempDiv.querySelectorAll('p, h1, h2, h3, h4, h5, h6');
-                    
-                    let y = 20; // Start position
-                    const pageHeight = doc.internal.pageSize.height - 20;
-                    const margin = 15;
-                    
-                    // Set default font
-                    doc.setFont('helvetica');
-                    doc.setFontSize(12);
-                    
-                    paragraphs.forEach((p) => {
-                        // Handle headings
-                        if (p.tagName.toLowerCase().startsWith('h')) {
-                            const level = parseInt(p.tagName.substring(1));
-                            const fontSize = 16 - (level * 2);
-                            doc.setFontSize(Math.max(fontSize, 10));
-                            doc.setFont('helvetica', 'bold');
-                        } else {
-                            doc.setFontSize(12);
-                            doc.setFont('helvetica', 'normal');
-                        }
-                        
-                        // Split text into lines that fit the page width
-                        const text = p.textContent;
-                        const lines = doc.splitTextToSize(text, doc.internal.pageSize.width - (margin * 2));
-                        
-                        // Add each line to the PDF
-                        lines.forEach((line) => {
-                            if (y > pageHeight) {
-                                doc.addPage();
-                                y = 20;
-                            }
-                            
-                            doc.text(line, margin, y);
-                            y += 7; // Line height
-                        });
-                        
-                        y += 5; // Paragraph spacing
+                    // Use html2canvas to capture the content
+                    const canvas = await html2canvas(tempDiv, {
+                        scale: 2,
+                        logging: false,
+                        useCORS: true,
+                        allowTaint: true
                     });
                     
-                    // Process tables if present
-                    const tables = tempDiv.querySelectorAll('table');
-                    tables.forEach((table) => {
-                        if (y > pageHeight - 50) {
-                            doc.addPage();
-                            y = 20;
-                        }
-                        
-                        const data = [];
-                        const rows = table.querySelectorAll('tr');
-                        
-                        rows.forEach((row) => {
-                            const rowData = [];
-                            const cells = row.querySelectorAll('td, th');
-                            
-                            cells.forEach((cell) => {
-                                rowData.push(cell.textContent);
-                            });
-                            
-                            data.push(rowData);
-                        });
-                        
-                        doc.autoTable({
-                            startY: y,
-                            head: data.slice(0, 1),
-                            body: data.slice(1),
-                            margin: { left: margin },
-                            styles: { fontSize: 10 }
-                        });
-                        
-                        y = doc.lastAutoTable.finalY + 10;
+                    // Remove the temporary div
+                    document.body.removeChild(tempDiv);
+                    
+                    // Create PDF from the canvas
+                    const imgData = canvas.toDataURL('image/png');
+                    const pdf = new jsPDF({
+                        orientation: 'portrait',
+                        unit: 'mm'
                     });
+                    
+                    const imgProps = pdf.getImageProperties(imgData);
+                    const pdfWidth = pdf.internal.pageSize.getWidth();
+                    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+                    
+                    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
                     
                     // Generate PDF blob
-                    const pdfBlob = doc.output('blob');
+                    const pdfBlob = pdf.output('blob');
                     return pdfBlob;
                 } catch (error) {
                     console.error('Error in conversion:', error);
+                    throw error;
+                }
+            }
+            
+            // Alternative text-based conversion for smaller files
+            async function convertWordToPdfText(arrayBuffer, fileName) {
+                try {
+                    const result = await mammoth.extractRawText({ arrayBuffer: arrayBuffer });
+                    const text = result.value;
+                    
+                    const pdf = new jsPDF();
+                    const lines = pdf.splitTextToSize(text, 180); // 180mm width
+                    
+                    let y = 20;
+                    for (let i = 0; i < lines.length; i++) {
+                        if (y > 280) { // Near bottom of page
+                            pdf.addPage();
+                            y = 20;
+                        }
+                        pdf.text(lines[i], 15, y);
+                        y += 7;
+                    }
+                    
+                    return pdf.output('blob');
+                } catch (error) {
+                    console.error('Error in text conversion:', error);
                     throw error;
                 }
             }
@@ -686,25 +663,33 @@
                 URL.revokeObjectURL(url);
             });
             
-            // Handle new conversion button click
-            newConversionBtn.addEventListener('click', function() {
-                // Reset the form
-                fileInput.value = '';
-                originalFile = null;
-                pdfBlob = null;
-                convertBtn.disabled = true;
+            // Update the convert button click handler to use the better conversion
+            convertBtn.addEventListener('click', async function() {
+                if (!originalFile) return;
+                
+                loadingIndicator.style.display = 'block';
                 resultsSection.style.display = 'none';
                 
-                // Reset upload area
-                uploadArea.innerHTML = `
-                    <i class="fas fa-file-word upload-icon"></i>
-                    <h3>Drag & Drop Your Word File Here</h3>
-                    <p>or click to browse files</p>
-                `;
+                try {
+                    const arrayBuffer = await readFileAsArrayBuffer(originalFile);
+                    
+                    // Try the visual conversion first, fall back to text if it fails
+                    let pdfBlob;
+                    try {
+                        pdfBlob = await convertWordToPdf(arrayBuffer, originalFile.name);
+                    } catch (visualError) {
+                        console.warn('Visual conversion failed, falling back to text:', visualError);
+                        pdfBlob = await convertWordToPdfText(arrayBuffer, originalFile.name);
+                    }
+                    
+                    displayResults(originalFile, pdfBlob);
+                    loadingIndicator.style.display = 'none';
+                } catch (error) {
+                    console.error('Conversion error:', error);
+                    alert('An error occurred during conversion. Please try again.');
+                    loadingIndicator.style.display = 'none';
+                }
             });
-            
-            // Display results
-            function displayResults(originalFile, pdfBlob) {
                 // Original file info
                 document.getElementById('originalFileName').textContent = originalFile.name;
                 document.getElementById('originalFileSize').textContent = formatFileSize(originalFile.size);
