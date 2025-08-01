@@ -277,6 +277,13 @@
             .subtitle {
                 font-size: 1rem;
             }
+                    .error-message {
+            color: var(--accent-color);
+            background-color: #fdecea;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin: 20px 0;
+            display: none;
         }
     </style>
 </head>
@@ -298,7 +305,7 @@
             <!-- Top Banner Ad -->
             <ins class="adsbygoogle"
                 style="display:block"
-                data-ad-client="ca-pub-9770610643444805"
+                data-ad-client="ca-pub-9770610643444805~6334751089"
                 data-ad-slot="4587389292"
                 data-ad-format="auto"
                 data-full-width-responsive="true"></ins>
@@ -311,6 +318,8 @@
             <div class="converter-container">
                 <h1>PDF to Word Converter</h1>
                 <p class="subtitle">Convert PDF files to editable Word documents while preserving formatting</p>
+
+              <div class="error-message" id="errorMessage"></div> 
                 
                 <div id="uploadArea" class="upload-area">
                     <div class="upload-icon">📄</div>
@@ -414,12 +423,12 @@
         
         <div class="ad-bottom">
             <!-- Google AdSense Ad Unit -->
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=pub-9770610643444805"
                 crossorigin="anonymous"></script>
             <!-- Bottom Banner Ad -->
             <ins class="adsbygoogle"
                 style="display:block"
-                data-ad-client="ca-pub-9770610643444805"
+                data-ad-client="ca-pub-9770610643444805~6334751089"
                 data-ad-slot="4587389292"
                 data-ad-format="auto"
                 data-full-width-responsive="true"></ins>
@@ -452,10 +461,13 @@
             const convertBtn = document.getElementById('convertBtn');
             const resultsSection = document.getElementById('resultsSection');
             const loadingIndicator = document.getElementById('loadingIndicator');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const errorMessage = document.getElementById('errorMessage');
             
             // Variables to store file data
             let originalFile = null;
-            let convertedFileBlob = null;
+            let convertedFileUrl = null;
+            let conversionStartTime = null;
             
             // Handle drag and drop
             uploadArea.addEventListener('dragover', function(e) {
@@ -510,19 +522,34 @@
                     uploadArea.innerHTML = `
                         <div style="font-size: 48px;">✅</div>
                         <h3>${file.name}</h3>
-                        <p>${(file.size / 1024).toFixed(2)} KB</p>
+                        <p>${formatFileSize(file.size)}</p>
                     `;
                     
                     // Update original file info
                     document.getElementById('originalFileName').textContent = file.name;
-                    document.getElementById('originalFileSize').textContent = `Size: ${(file.size / 1024).toFixed(2)} KB`;
+                    document.getElementById('originalFileSize').textContent = `Size: ${formatFileSize(file.size)}`;
                     
                     // Try to get page count (this would normally be done by a server-side process)
                     document.getElementById('originalPageCount').textContent = 'Pages: Estimating...';
                     
                     // Reset results section
                     resultsSection.style.display = 'none';
+                    downloadBtn.disabled = true;
+                    
+                    // Estimate page count (simulated)
+                    setTimeout(() => {
+                        // This is just a simulation - in a real app you'd need a PDF parser
+                        const estimatedPages = Math.max(1, Math.round(file.size / 50000));
+                        document.getElementById('originalPageCount').textContent = `Pages: ${estimatedPages}`;
+                    }, 500);
                 }
+            }
+            
+            // Format file size for display
+            function formatFileSize(bytes) {
+                if (bytes < 1024) return bytes + ' bytes';
+                else if (bytes < 1048576) return (bytes / 1024).toFixed(2) + ' KB';
+                else return (bytes / 1048576).toFixed(2) + ' MB';
             }
             
             // Handle convert button click
@@ -532,37 +559,37 @@
                 // Show loading indicator
                 loadingIndicator.style.display = 'block';
                 resultsSection.style.display = 'none';
+                convertBtn.disabled = true;
+                conversionStartTime = new Date();
                 
                 // Get conversion settings
                 const format = document.getElementById('format').value;
-                const quality = document.getElementById('quality').value;
-                const layout = document.getElementById('layout').value;
                 
-                // Simulate conversion (in a real app, this would be an API call)
-                setTimeout(() => {
-                    simulateConversion(originalFile, format, quality, layout)
-                        .then(convertedBlob => {
-                            convertedFileBlob = convertedBlob;
-                            displayResults(originalFile, convertedBlob);
-                            
-                            // Hide loading indicator
-                            loadingIndicator.style.display = 'none';
-                        })
-                        .catch(error => {
-                            console.error('Conversion error:', error);
-                            alert('An error occurred during conversion. Please try again.');
-                            loadingIndicator.style.display = 'none';
-                        });
-                }, 2000); // Simulate 2 second conversion time
+                // Use the free PDF.co API for conversion
+                convertPdfToWord(originalFile, format)
+                    .then(convertedUrl => {
+                        convertedFileUrl = convertedUrl;
+                        displayResults(originalFile, convertedUrl);
+                        
+                        // Hide loading indicator
+                        loadingIndicator.style.display = 'none';
+                        downloadBtn.disabled = false;
+                    })
+                    .catch(error => {
+                        console.error('Conversion error:', error);
+                        alert('An error occurred during conversion. Please try again.');
+                        loadingIndicator.style.display = 'none';
+                        convertBtn.disabled = false;
+                    });
             });
             
             // Handle download button click
-            document.getElementById('downloadBtn').addEventListener('click', function() {
-                if (!convertedFileBlob) return;
+            downloadBtn.addEventListener('click', function() {
+                if (!convertedFileUrl) return;
                 
-                const url = URL.createObjectURL(convertedFileBlob);
+                // Create a temporary link and trigger download
                 const a = document.createElement('a');
-                a.href = url;
+                a.href = convertedFileUrl;
                 
                 // Set appropriate file extension
                 let extension;
@@ -577,33 +604,80 @@
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
-                URL.revokeObjectURL(url);
             });
             
-            // Simulate PDF to Word conversion (in a real app, this would call an API)
-            function simulateConversion(file, format, quality, layout) {
-                return new Promise((resolve) => {
-                    // In a real implementation, you would:
-                    // 1. Upload the file to your server
-                    // 2. Process it with a library like pdf2docx, LibreOffice, or a cloud API
-                    // 3. Return the converted file
+           // Convert PDF to Word using PDFTables API (free tier)
+            function convertPdfToWord(file, format) {
+                return new Promise((resolve, reject) => {
+                    errorMessage.style.display = 'none';
                     
-                    // For this demo, we'll create a dummy Word file
-                    setTimeout(() => {
-                        // Create a dummy Word file (in reality, this would be the converted file)
-                        const dummyContent = "This is a simulated Word document that would contain your converted PDF content.";
-                        const blob = new Blob([dummyContent], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
-                        resolve(blob);
-                    }, 1500);
+                    // PDFTables free API endpoint
+                    const apiUrl = 'https://pdftables.com/api?key=free&format';
+                    
+                    // Map our format to PDFTables format
+                    let apiFormat;
+                    switch(format) {
+                        case 'docx': apiFormat = 'docx'; break;
+                        case 'doc': apiFormat = 'doc'; break;
+                        case 'rtf': apiFormat = 'rtf'; break;
+                        case 'odt': apiFormat = 'odt'; break;
+                        default: apiFormat = 'docx';
+                    }
+                    
+                    const formData = new FormData();
+                    formData.append('file', file);
+                    
+                    fetch(`${apiUrl}=${apiFormat}`, {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`API error: ${response.status}`);
+                        }
+                        return response.blob();
+                    })
+                    .then(blob => {
+                        if (blob.size === 0) {
+                            throw new Error('Received empty file from API');
+                        }
+                        
+                        // Check if the response is actually an error message
+                        if (blob.type === 'application/json') {
+                            return blob.text().then(text => {
+                                const errorData = JSON.parse(text);
+                                throw new Error(errorData.message || 'Conversion failed');
+                            });
+                        }
+                        
+                        const url = URL.createObjectURL(blob);
+                        resolve(url);
+                    })
+                    .catch(error => {
+                        // Handle specific API limitations
+                        if (error.message.includes('quota') || error.message.includes('limit')) {
+                            showError('Free conversion limit reached. Please try again later or use a different file.');
+                        } else {
+                            showError(`Conversion failed: ${error.message}`);
+                        }
+                        reject(error);
+                    });
                 });
             }
             
+            function showError(message) {
+                errorMessage.textContent = message;
+                errorMessage.style.display = 'block';
+                loadingIndicator.style.display = 'none';
+                convertBtn.disabled = false;
+            }
+                    
+
             // Display results
-            function displayResults(originalFile, convertedBlob) {
+            function displayResults(originalFile, convertedUrl) {
                 // Original file info
                 document.getElementById('originalFileName').textContent = originalFile.name;
-                document.getElementById('originalFileSize').textContent = `Size: ${(originalFile.size / 1024).toFixed(2)} KB`;
-                document.getElementById('originalPageCount').textContent = 'Pages: 5'; // Simulated page count
+                document.getElementById('originalFileSize').textContent = `Size: ${formatFileSize(originalFile.size)}`;
                 
                 // Converted file info
                 const convertedName = originalFile.name.replace('.pdf', 
@@ -612,8 +686,14 @@
                     document.getElementById('format').value === 'odt' ? '.odt' : '.docx');
                 
                 document.getElementById('convertedFileName').textContent = convertedName;
-                document.getElementById('convertedFileSize').textContent = `Size: ${(convertedBlob.size / 1024).toFixed(2)} KB`;
-                document.getElementById('conversionTime').textContent = 'Time: 2.1s'; // Simulated conversion time
+                
+                // For the free API, we can't get the file size before download
+                document.getElementById('convertedFileSize').textContent = 'Size: Will be available after download';
+                
+                // Calculate conversion time
+                const conversionEndTime = new Date();
+                const conversionDuration = (conversionEndTime - conversionStartTime) / 1000;
+                document.getElementById('conversionTime').textContent = `Time: ${conversionDuration.toFixed(1)}s`;
                 
                 // Show results
                 resultsSection.style.display = 'block';
