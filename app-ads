@@ -9,7 +9,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <!-- App-ads.txt reference -->
+    <meta http-equiv="refresh" content="0; url=https://raja1068.github.io/Tools/google.com, pub-9770610643444805, DIRECT, f08c47fec0942fa0">
+    <!DOCTYPE html>
     <meta name="google-adsense-account" content="pub-9770610643444805">
     <style>
         :root {
@@ -577,6 +580,7 @@
     </style>
 </head>
 <body>
+    Redirecting to app-ads.txt...
     <!-- Header -->
     <header>
         <div class="container header-container">
