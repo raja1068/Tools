@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - Masoom India Tools</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            line-height: 1.7;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #0056b3;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-top: 25px;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        ul {
+            margin-left: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+            color: #777;
+        }
+
+        a {
+            color: #0056b3;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Terms of Service</h1>
+    <p><strong>Last Updated:</strong> March 2026</p>
+
+    <p>Welcome to <strong>Masoom India Tools</strong> ("we", "our", or "us"). By accessing or using our website 
+    <a href="https://raja1068.github.io/Tools/" target="_blank">https://raja1068.github.io/Tools/</a>, 
+    you agree to be bound by these Terms of Service. If you do not agree, please do not use our website.</p>
+
+    <h2>1. Use of Website</h2>
+    <p>Our website provides free online tools and resources. You agree to use the website only for lawful purposes and in a way that does not harm, disrupt, or interfere with other users.</p>
+
+    <h2>2. User Responsibilities</h2>
+    <ul>
+        <li>Do not use the website for illegal or unauthorized purposes.</li>
+        <li>Do not attempt to hack, damage, or disrupt the website.</li>
+        <li>Do not upload or share harmful files, malware, or malicious code.</li>
+    </ul>
+
+    <h2>3. Intellectual Property</h2>
+    <p>All content on this website, including tools, design, text, and graphics, is the property of Masoom India unless otherwise stated. You may not copy, reproduce, or redistribute content without permission.</p>
+
+    <h2>4. Disclaimer</h2>
+    <p>All tools and services are provided "as is" without any warranties. We do not guarantee accuracy, reliability, or uninterrupted availability of the website.</p>
+
+    <h2>5. Limitation of Liability</h2>
+    <p>We are not responsible for any direct or indirect damages resulting from the use or inability to use our website or tools.</p>
+
+    <h2>6. Third-Party Services</h2>
+    <p>Our website may include links or integrations with third-party services. We are not responsible for their content or policies.</p>
+
+    <h2>7. Changes to Terms</h2>
+    <p>We may update these Terms of Service at any time. Continued use of the website means you accept the updated terms.</p>
+
+    <h2>8. Governing Law</h2>
+    <p>These terms are governed by the laws of India. Any disputes will be subject to the jurisdiction of Kolkata, India.</p>
+
+    <h2>9. Contact Us</h2>
+    <p>If you have any questions, contact us at:</p>
+    <p>Email: <a href="mailto:masoomindia7@gmail.com">masoomindia7@gmail.com</a></p>
+    <p>Phone: +91 9874234631</p>
+
+    <div class="footer">
+        <p>&copy; 2026 Masoom India - Tech Division</p>
+    </div>
+
+</div>
+
+</body>
+</html>
